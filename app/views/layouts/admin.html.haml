@@ -1,5 +1,5 @@
 !!!
-%html{:xmlns => "http://www.w3.org/1999/xhtml"}
+%html{html_attrs('en-US')}
   %head
     - hook :admin_inside_head do
       = render :partial => "shared/admin_head"
@@ -9,19 +9,15 @@
     #wrapper
       #header
         - if current_user
-        %ul#login-nav
-          %li
-            = t('logged_in_as')
-            \: #{current_user.email}
-          %li= link_to t('account'), user_path(current_user)
-          %li= link_to t('logout'), logout_path
-          %li= link_to t('store'), products_path
-        </haml:block>
+          %ul#login-nav
+            %li #{t('logged_in_as')}: #{current_user.email}
+            %li= link_to t('account'), user_path(current_user)
+            %li= link_to t('logout'), logout_path
+            %li= link_to t('store'), products_path
         %h1.logo= link_to t("administration"), admin_path
         #progress
           = image_tag 'progress.gif'
-          = t('loading')
-          \...
+          #{t('loading')}...
       #admin-menu
         %ul
           - hook :admin_tabs do
@@ -32,17 +28,13 @@
         %br.clear/
       #content{:class => "#{'with-sidebar ' unless @content_for_sidebar.blank?} clear"}
         - if flash[:error]
-        .flash.error= flash[:error]
-        </haml:block>
+          .flash.error= flash[:error]
         - if flash[:notice]
-        .flash.notice= flash[:notice]
-        </haml:block>
+          .flash.notice= flash[:notice]
         = yield
         - unless @content_for_sidebar.blank?
-        %br.clear/
-        #sidebar
-          = yield :sidebar
-        </haml:block>
+          %br.clear/
+          #sidebar= yield :sidebar
       #footer
         %p
           = t("icons_by")
