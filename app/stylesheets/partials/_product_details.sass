@@ -1,0 +1,53 @@
+@import colors.sass
+@import mixins.sass
+
+#product-variants
+  :margin-bottom 1em
+  ul
+    +no-bullets
+    +no_margin_or_padding
+
+#product-images
+  +column(7)
+  h4
+    :padding 6px 0
+    :margin 0
+    :font-weight bold
+    :clear both
+  #main-image
+    :min-height 250px
+    :position relative
+    img
+      :position absolute
+      :top 0
+      :bottom 0
+      :left 0
+      :right 0
+      :margin auto
+
+#product-description
+  +column(8)
+  +colborder
+
+#cart-form
+  +column-last(7)
+
+#taxon-crumbs
+  +column(24)
+  :display block
+  :float right
+  :margin-top 20px
+  :width 300px
+
+dl.table-display
+  :margin 0
+  :padding 0
+  dt, dd
+    :float left
+    :margin 0
+    :padding 5px
+    :border-top = "1px solid" !default_border_color
+  dt
+    :width 100px
+  dd
+    :width 180px

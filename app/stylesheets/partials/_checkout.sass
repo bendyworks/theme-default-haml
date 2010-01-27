@@ -1,0 +1,30 @@
+@import colors.sass
+@import mixins.sass
+@import checkout_progress.sass
+
+div#checkout
+  :position relative
+  .progress-steps
+    :position absolute
+    :top 0.5em
+    :right 0
+  form
+    :background
+      :position top right
+      :repeat no-repeat
+  #checkout_form_address
+    :background-image = image_url('steps/2.png')
+    #billing
+      +column(8)
+    #shipping
+      +column-last(8)
+  #checkout_form_delivery
+    :background-image = image_url('steps/3.png')
+  #checkout_form_payment
+    :background-image = image_url('steps/5.png')
+    select
+      :width 75px
+    #payment
+      +column(8)
+    #order_details
+      +column(12)

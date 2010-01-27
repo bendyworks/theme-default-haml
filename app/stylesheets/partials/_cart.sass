@@ -1,0 +1,25 @@
+@import colors.sass
+@import mixins.sass
+
+div#subtotal
+  +rightie
+  :width auto
+  :text-align right
+
+table
+  :border-collapse collapse
+  th
+    :background transparent
+    :border-bottom 1px solid #DDD
+  &#cart-detail tr
+    td
+      :border-bottom 1px solid #DDD
+      :padding 1em 0
+      input[type=text]
+        :text-align center
+        :margin-right 8px
+    &#none td
+      :border-bottom none
+    h4
+      :margin-bottom 0
+  

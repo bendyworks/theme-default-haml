@@ -1,0 +1,29 @@
+@import mixins.sass
+
+.flash
+  +rounded_corners
+  :font-size 1.3em
+  :margin-bottom 1em
+  :padding 0.8em
+  &.notice
+    +message_box(#CDF, #569, #9AC)
+  &.errors
+    +message_box(#F4B4B4, #000, #000)
+
+.formError, .errorExplanation
+  +message_box(#F4B4B4, #000, #000)
+  +rounded_corners
+  :font-size 1.3em
+  :margin-bottom 1em
+  :padding 0.8em
+  p, h2
+    :margin 0
+  ul
+    :margin-bottom 0
+  h2
+    :font
+      :size 1em
+      :weight bold
+
+.fieldWithErrors
+  :clear none

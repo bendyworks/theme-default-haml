@@ -1,0 +1,78 @@
+=no_margin_or_padding
+  :margin 0
+  :padding 0
+.no_margin_or_padding
+  +no_margin_or_padding
+
+=leftie
+  :float left
+  :width 49%
+.leftie
+  +leftie
+
+=rightie
+  :float right
+  :width 49%
+.rightie
+  +rightie
+
+=rounded_corners(!radius = 5px)
+  :-moz-border-radius = !radius
+  :-webkit-border-radius = !radius
+  :border-radius = !radius
+.rounded_corners
+  +rounded_corners
+
+=message_box(!bg_color = #CDF, !color = #569, !border_color = #9AC)
+  :background
+    :color = !bg_color
+    :image = image_url('shadow_top.png')
+    :position 0px -50px
+    :repeat repeat-x
+  :color = !color
+  :border = '1px solid' !border_color
+.message_box
+  +message_box
+
+=clearfix
+  :overflow hidden
+  :display inline-block
+.clearfix
+  +clearfix
+
+=nowrap
+  :white-space nowrap
+.nowrap
+  +nowrap
+
+=no-bullets
+  :list-style none
+.no-bullets
+  +no-bullets
+
+=inline-list
+  +no_margin_or_padding
+  :list-style-type none
+  :display inline
+  li
+    +no_margin_or_padding
+    :display inline
+.inline-list
+  +inline-list
+
+!col_margin = 10px
+!col_width = 30px
+
+=column-last(!span = 1)
+  :display inline
+  :float left
+  :width = !col_width * !span + (!col_margin * (!span - 1))
+
+=column(!span = 1)
+  +column-last(!span)
+  :margin-right = !col_margin
+
+=colborder
+  :padding-right 24px
+  :margin-right 24px
+  :border-right 1px solid #EEE

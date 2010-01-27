@@ -1,0 +1,66 @@
+@import mixins.sass
+
+button, a.button, input.button
+  +rounded_corners(0.3em)
+  :background
+    :color #EFEFEF !important
+    :image = image_url('bg-button.png') "important"
+    :position center left !important
+    :repeat repeat-x !important
+  :border
+    :style solid
+    :width 1px !important
+    :color #DDD #999 #999 #DDD !important
+  :-moz-outline-radius 0.3em
+  :color #111
+  :display inline-block
+  :font
+    :family Helvetica Neue, Helvetica, Arial Sans-serif
+    :size 1.1em !important
+    :size-adjust none
+    :stretch normal
+    :style normal
+    :weight normal
+  :line-height 1.2em
+  :margin 0
+  :overflow visible
+  :padding 10px 17px
+  :text
+    :decoration none
+    :transform lowercase
+  :width auto
+  :height auto
+  :cursor pointer
+  &.primary
+    :font-weight bold
+    :color #000
+  &:hover
+    :background-image = image_url('bg-button-hover.png') !important
+  &.large
+    +rounded_corners(0.3em)
+    :font-size 1.4em !important
+    :line-height 1.4em
+  &.small
+    +rounded_corners(4px)
+    :font-size 0.9em
+    :line-height 1.4em
+    :padding 5px 10px
+    img
+      :margin 0 3px 0 0 !important
+  &.update, &.checkout
+    img
+      :margin-right 7px
+  img
+    :vertical-align middle
+    :margin-right 7px
+  &:focus
+    :outline none
+
+button::-moz-focus-inner
+  :padding 0
+  :border none
+
+p
+  button, a.button
+    img
+      :margin 0 5px 0 0

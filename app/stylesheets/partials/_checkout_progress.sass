@@ -1,0 +1,48 @@
+ol.progress-steps
+  :list-style none
+  :margin 0
+  :padding 0
+  :line-height 1em
+  :font-size 12px
+  li
+    :margin 0
+    :padding 0
+    :list-style none
+    :display block
+    :float left
+    :color #999
+    :background
+      :position top left
+      :repeat no-repeat
+      :image = image_url('step-progress/incomplete-incomplete.gif')
+    span
+      :padding 5px 14px 7px 24px
+      :display block
+      :float left
+      :background
+        :position top right
+        :repeat no-repeat
+    a
+      :text-decoration none
+      :color #333
+    &.current-first, &.completed-first
+      span
+        :padding-left 14px
+    &.current-first
+      :background-image = image_url('step-progress/current-first.gif')
+    &.completed-first
+      :background-image = image_url('step-progress/completed-first.gif') "!important"
+    &.current, &.current-first, &.current-last
+      :color #FFF
+    &.completed
+      :background-image = image_url('step-progress/completed-completed.gif')
+    &.current, &.current-last
+      :background-image = image_url('step-progress/completed-current.gif')
+    &.next, &.next-last
+      :background-image = image_url('step-progress/current-incomplete.gif')
+    &.last, &.next-last
+      span
+        :background-image = image_url('step-progress/incomplete-right.gif')
+    &.current-last
+      span
+        :background-image = image_url('step-progress/current-right.gif')

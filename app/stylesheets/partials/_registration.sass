@@ -1,0 +1,26 @@
+@import colors.sass
+@import mixins.sass
+
+#signup #new-customer, #login #existing-customer
+  +column(12)
+  h2
+    :margin-bottom 0.25em
+  p
+    :margin-bottom 10px
+    input.title
+      :padding 3px
+      :margin 0
+  input[type=checkbox]
+    :top 0
+
+input.openid_url
+  :background
+    :color #FFF
+    :image = image_url('openid-inputicon.gif')
+    :repeat no-repeat
+    :attachment scroll
+    :position 0 50%
+  :padding-left 18px
+  :border 1px solid #BBB
+  :font-size 1.5em
+  
