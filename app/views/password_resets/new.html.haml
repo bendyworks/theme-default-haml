@@ -3,9 +3,7 @@
 %br/
 %br/
 - form_tag password_resets_path do
-  %label
-    = t(:email)
-    \:
+  %label #{t(:email)}:
   %br/
   = text_field_tag "email"
   %br/
