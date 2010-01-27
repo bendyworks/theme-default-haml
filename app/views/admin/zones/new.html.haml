@@ -1,0 +1,7 @@
+= render :partial => 'admin/shared/configuration_menu'
+%h1= t("new_zone")
+= error_messages_for :zone
+- form_for(@zone, :url => collection_url) do |zone_form|
+  = render "form", :zone_form => zone_form
+  %p.form-buttons
+    %span#create-zone= button t("create")

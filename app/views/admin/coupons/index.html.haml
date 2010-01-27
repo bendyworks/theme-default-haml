@@ -1,0 +1,29 @@
+.toolbar
+  %ul.actions
+    %li
+      = button_link_to t("new_coupon"), new_object_url, :icon => 'add'
+  %br.clear/
+%h1= t("coupons")
+%table.index
+  %thead
+    %th= t("code")
+    %th= t("description")
+    %th= t("combine")
+    %th= t("usage_limit")
+    %th= t("expiration")
+    %th= t("calculator")
+    %th= t("action")
+  %tbody
+    - @coupons.each do |coupon|
+    %tr{:id => dom_id coupon}
+      %td{:width => "80px"}= coupon.code
+      %td{:width => "200px"}= coupon.description
+      %td{:width => "40px"}= coupon.combine
+      %td{:width => "40px"}= coupon.usage_limit
+      %td{:width => "70px"}= coupon.expires_at.to_s(:short_date) if coupon.expires_at
+      %td{:width => "120px"}= coupon.calculator.to_s
+      %td
+        = link_to_edit coupon
+        \&nbsp;
+        \#{link_to_delete coupon}
+    </haml:block>

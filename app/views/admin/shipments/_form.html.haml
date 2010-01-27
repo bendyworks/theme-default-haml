@@ -1,0 +1,53 @@
+%table.index{:style => "width:100%;"}
+  %tr
+    %th{:width => "130px"}= t('include_in_shipment')
+    %th= t('sku')
+    %th= t('item_description')
+    %th= t('state')
+    %th= t('note')
+  - @shipment.order.inventory_units.each do |inventory_unit|
+  %tr
+    %td{:style => "text-align:center;"}
+      = check_box_tag "inventory_units[#{inventory_unit.id}]", :true, (inventory_unit.shipment == @shipment),{:disabled => %w(shipped backordered).include?(inventory_unit.state)}
+    %td{:valign => "top", :width => "120px;"}= inventory_unit.variant.sku
+    %td{:width => "300"}
+      = inventory_unit.variant.product.name
+      = "(" + variant_options(inventory_unit.variant) + ")" unless inventory_unit.variant.option_values.empty?
+    %td= t(inventory_unit.state)
+    %td
+      - if inventory_unit.shipment == @shipment
+        = t('included_in_this_shipment')
+      - elsif !inventory_unit.shipment_id.nil?
+        = t('included_in_other_shipment')
+        \- #{link_to inventory_unit.shipment.number, edit_admin_order_shipment_url(inventory_unit.order, inventory_unit.shipment_id)}
+  </haml:block>
+.yui-g
+  .yui-u.first
+    %fieldset
+      %legend= t("shipping_address")
+      = render :partial => 'admin/shared/form_address', :locals => {:f => shipment_form}
+  .yui-u
+    %fieldset
+      %legend &nbsp;
+      %p
+        = shipment_form.label :shipping_method_id, t('shipping_method')
+        \:
+        %br/
+        = shipment_form.collection_select :shipping_method_id, @shipping_methods, :id, :name
+      %p
+        = shipment_form.label :tracking, t('tracking')
+        \:
+        %br/
+        = shipment_form.text_field :tracking
+  - if Spree::Config[:shipping_instructions]
+  .yui-u
+    %fieldset
+      %legend
+        = t("shipping_instructions")
+      %p
+        = shipment_form.text_area :special_instructions
+  </haml:block>
+%p
+  %label
+    = check_box_tag :recalculate, true, true
+    = t('recalculate_order_total')

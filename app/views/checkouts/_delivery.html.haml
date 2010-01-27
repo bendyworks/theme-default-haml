@@ -1,0 +1,21 @@
+%fieldset#shipping_method
+  %legend= t("shipping_method")
+  - checkout_form.fields_for :ship_address do |ship_address_form|
+  .inner
+    #methods
+      %p.field.radios
+        - @available_methods.each do |shipping_method|
+        %label
+          = radio_button(:checkout, :shipping_method_id, shipping_method[:id])
+          = shipping_method[:name]
+          = shipping_method[:rate]
+        %br/
+        </haml:block>
+    - if Spree::Config[:shipping_instructions]
+    %p#minstrs
+      %label{:for => ""}= t("shipping_instructions")
+      = ship_address_form.text_area :special_instructions, :cols => 40, :rows => 7
+    </haml:block>
+  </haml:block>
+.form-buttons
+  %input.continue.button.primary{:type => "submit", :value => t("save_and_continue")}/

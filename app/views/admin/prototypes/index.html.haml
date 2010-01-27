@@ -1,0 +1,26 @@
+= render :partial => 'admin/shared/product_sub_menu'
+.toolbar
+  %ul.actions
+    %li#new_proto_link
+      = button_link_to_remote t("new_prototype"), { |
+        :url => new_admin_prototype_url,            |
+        :method => :get,                            |
+        :update => "prototypes"}, :icon => 'add'    |
+  %br.clear/
+%h1= t("prototypes")
+= image_tag "spinner.gif", :plugin=>"spree", :style => "display:none", :id => 'busy_indicator'
+#prototypes
+%table.index
+  %thead
+    %tr
+      %th= t("name")
+      %th= t("action")
+  %tbody
+    - @prototypes.each do |prototype|
+    %tr{:id => dom_id prototype}
+      %td= prototype.name
+      %td.actions
+        = link_to_edit(prototype)
+        \&nbsp;
+        \#{link_to_delete(prototype)}
+    </haml:block>

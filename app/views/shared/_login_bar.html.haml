@@ -1,0 +1,5 @@
+- if current_user
+  %li= link_to t('my_account'), user_path(current_user)
+  %li= link_to t('logout'), logout_path
+- else
+  %li= link_to t('log_in'), login_path

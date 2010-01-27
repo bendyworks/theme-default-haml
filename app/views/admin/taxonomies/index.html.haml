@@ -1,0 +1,10 @@
+= render :partial => 'admin/shared/configuration_menu'
+.toolbar
+  %ul.actions
+    %li
+      = button_link_to t("new_taxonomy"), new_admin_taxonomy_url, :icon => 'add'
+      </p>
+  %br.clear/
+%h1= t("taxonomies")
+#list-taxonomies
+  = render :partial => 'list'

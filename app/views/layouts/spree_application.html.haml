@@ -1,0 +1,35 @@
+!!!
+%html{:xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    - hook :inside_head do
+      = render :partial => 'shared/head'
+  - if @body_class.nil?
+  - if @content_for_sidebar
+  - @body_class = 'two-col'
+  - else
+  - @body_class = 'one-col'
+  - end
+  - end
+  <body class="#{@body_class}"#{%( id="#{@body_id}") if @body_id}>
+  #header.container
+    #login-bar
+      %ul#nav-bar
+        = render 'shared/nav_bar'
+    = logo
+  #wrapper.container
+    - if @content_for_sidebar
+    #sidebar
+      - hook :sidebar do
+        = yield :sidebar
+    </haml:block>
+    #content
+      = breadcrumbs(@taxon) if @taxon
+      - if flash[:notice]
+      .flash.notice= flash[:notice]
+      </haml:block>
+      - if flash[:error]
+      .flash.errors= flash[:error]
+      </haml:block>
+      = yield
+    = render :partial => 'shared/footer'
+  </body>

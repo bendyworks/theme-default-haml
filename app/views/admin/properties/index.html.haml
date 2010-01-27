@@ -1,0 +1,28 @@
+= render :partial => 'admin/shared/product_sub_menu'
+.toolbar
+  %ul.actions
+    %li#new_prop_link
+      = button_link_to_remote t("new_property"),  { |
+        :url => new_admin_property_url,             |
+        :method => :get,                            |
+        :update => "properties"}, :icon => 'add'    |
+  %br.clear/
+%h1= t("properties")
+#properties
+= image_tag "spinner.gif", :plugin=>"spree", :style => "display:none", :id => 'busy_indicator'
+%table.index
+  %thead
+    %tr
+      %th= t("name")
+      %th= t("presentation")
+      %th
+  %tbody
+    - @properties.each do |property|
+    %tr{:id => dom_id property}
+      %td= property.name
+      %td= property.presentation
+      %td.actions
+        = link_to_edit(property)
+        \&nbsp;
+        \#{link_to_delete(property)}
+    </haml:block>

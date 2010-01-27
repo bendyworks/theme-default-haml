@@ -1,0 +1,7 @@
+= render :partial => 'admin/shared/configuration_menu'
+%h1= t("new_state")
+= error_messages_for :state
+- form_for(:state, :url => collection_url) do |f|
+  = render :partial => "form", :locals => { :f => f }
+  %p.form-buttons
+    = button t("create")

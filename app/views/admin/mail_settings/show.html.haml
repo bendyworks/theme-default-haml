@@ -1,0 +1,62 @@
+= render :partial => 'admin/shared/configuration_menu'
+%h1= t("mail_server_settings")
+</haml:block>
+  #mail_delivery_status.error-or-notice
+    = if Spree::Config[:enable_mail_delivery]            |
+        content_tag(:h4, t('mail_delivery_enabled'))     |
+      else                                               |
+        content_tag(:h4, t('mail_delivery_not_enabled')) |
+      end                                                |
+    -#
+    = if Spree::Config[:use_mail_queue]               |
+        content_tag(:h4, t('mail_queue_enabled'))     |
+      else                                            |
+        content_tag(:h4, t('mail_queue_not_enabled')) |
+      end                                             |
+  %table
+    %tr
+      %th{:scope => "row"}
+        = t("smtp_domain")
+        \:
+      %td= Spree::Config[:mail_domain]
+    %tr
+      %th{:scope => "row"}
+        = t('smtp_mail_host')
+        \:
+      %td= Spree::Config[:mail_host]
+    %tr
+      %th{:scope => "row"}
+        = t('smtp_port')
+        \:
+      %td= Spree::Config[:mail_port]
+    %tr
+      %th{:scope => "row"}
+        = t('secure_connection_type')
+        \:
+      %td= Spree::Config[:secure_connection_type]
+    %tr
+      %th{:scope => "row"}
+        = t('smtp_authentication_type')
+        \:
+      %td= Spree::Config[:mail_auth_type]
+    - unless Spree::Config[:mail_auth_type] == "none"
+    %tr
+      %th
+        = t('smtp_username')
+        \:
+      %td= Spree::Config[:smtp_username]
+    %tr
+      %th
+        = t('smtp_password')
+        \:
+      %td= t("not_shown") unless Spree::Config[:smtp_password].blank?
+%tr
+  %th
+    = t('copy_all_mails_to')
+    \:
+  %td
+    = t('a_copy_of_all_mail_will_be_sent_to_the_following_addresses')
+    %br/
+    = Spree::Config[:mail_bcc]
+</table>
+%p= link_to_with_icon 'edit', t("edit"), edit_admin_mail_settings_path

@@ -1,0 +1,32 @@
+- if tracker = Tracker.current
+  :javascript
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    :javascript
+    var pageTracker = _gat._getTracker("#{tracker.analytics_id}");
+    pageTracker._initData();
+    
+    /* Standard analytics or "virtual page" (useful for goal tracking and funnel stuff) plus optional E-Commerce conversion */
+<haml:silent>     if flash[:analytics]                              
+</haml:silent><haml:block>      pageTracker._trackPageview("#{flash[:analytics]}");
+</haml:block><haml:silent>     else  
+</haml:silent><haml:block>      pageTracker._trackPageview();
+</haml:block>
+<haml:silent>     if flash[:commerce_tracking] 
+</haml:silent><haml:block>      // report e-commerce transaction information when applicable
+      pageTracker._addTrans(
+      "#{@order.number}",		//Order Number
+      "",		//Affiliation
+      "#{@order.total}",		//Order total
+      "#{@order.tax_charges.sum(:amount).to_s}",		//Tax Amount
+      "#{@order.shipping_charges.sum(:amount).to_s}",		//Ship Amount
+      "",		//City
+      "",		//State
+      ""		//Country
+      );
+<haml:silent>       @order.line_items.each do |line_item| 
+</haml:silent><haml:block>      pageTracker._addItem("#{@order.number}", "#{line_item.variant.sku}", "#{line_item.variant.product.name}", 
+        "" /*Product Category*/, "#{line_item.price}", "#{line_item.quantity}");
+</haml:block>      pageTracker._trackTrans();
+
+</haml:block>  

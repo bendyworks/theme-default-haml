@@ -1,0 +1,48 @@
+%h1= t("configurations")
+%table.index
+  %thead
+    %tr
+      %th= t("system")
+      %th= t("description")
+  %tbody
+    - hook :admin_configurations_menu do
+    %tr
+      %td= link_to t("general_settings"), admin_general_settings_path
+      %td= t("general_settings_description")
+    %tr
+      %td= link_to t("mail_server_settings"), admin_mail_settings_path
+      %td= t("email_server_settings_description")
+    %tr
+      %td= link_to t("tax_categories"), admin_tax_categories_path
+      %td= t("tax_categories_setting_description")
+    %tr
+      %td= link_to t("zones"), admin_zones_path
+      %td= t("zone_setting_description")
+    %tr
+      %td= link_to t("states"), admin_country_states_path(Spree::Config[:default_country_id])
+      %td= t("state_setting_description")
+    %tr
+      %td= link_to t("gateway"), admin_gateways_path
+      %td= t("gateway_setting_description")
+    %tr
+      %td= link_to t("billing_integration"), admin_billing_integrations_path
+      %td= t("billing_integrations_description")
+    %tr
+      %td= link_to t("taxonomies"), admin_taxonomies_path
+      %td= t("taxonomies_setting_description")
+    %tr
+      %td= link_to t("shipping_methods"), admin_shipping_methods_path
+      %td= t("shipping_methods_description")
+    %tr
+      %td= link_to t("inventory_settings"), admin_inventory_settings_path
+      %td= t("inventory_setting_description")
+    %tr
+      %td= link_to t("tax_rates"), admin_tax_rates_path
+      %td= t("tax_rates_description")
+    %tr
+      %td= link_to t("tax_settings"), admin_tax_settings_path
+      %td= t("tax_settings_description")
+    %tr
+      %td= link_to t("coupons"), admin_coupons_path
+      %td= t("coupons_description")
+    </haml:block>

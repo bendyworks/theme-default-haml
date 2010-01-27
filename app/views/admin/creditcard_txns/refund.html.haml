@@ -1,0 +1,10 @@
+= render :partial => 'admin/shared/order_tabs', :locals => {:current => "Creditcards"}
+- form_tag do
+  = hidden_field_tag :txn_id, params[:txn_id]
+  %h3= t('refund')
+  %fieldset
+    %p
+      %label{:for => "amount"}= t("amount")
+      = text_field_tag :amount, @creditcard_txn.amount
+    %p.form-buttons
+      = button t("make_refund")

@@ -1,0 +1,30 @@
+- unless @order.returnable_units.nil?
+  .toolbar
+    %ul.actions
+      %li
+        = button_link_to t("new_return_authorization"), new_admin_order_return_authorization_url(@order), :icon => 'add'
+    %br.clear/
+= render :partial => 'admin/shared/order_tabs', :locals => {:current => "Return Authorizations"}
+%table.index
+  %tr
+    %th= t("rma_number")
+    %th= t("state")
+    %th= t("amount")
+    %th= "#{t('spree.date')}/#{t('spree.time')}"
+    %th
+  - @return_authorizations.each do |return_authorization|
+  %tr{:id => dom_id(return_authorization)}
+    %td= return_authorization.number
+    %td= t(return_authorization.state.downcase)
+    %td= number_to_currency(return_authorization.amount)
+    %td= return_authorization.created_at.to_s(:date_time24)
+    %td
+      = link_to_edit return_authorization
+      \&nbsp;
+      \#{link_to_delete return_authorization}
+  </haml:block>
+  - if @order.shipped_units.nil?
+  %tr
+    %td{:colspan => "5"}= t("cannot_create_returns")
+  </haml:block>
+= button_link_to t('continue'), admin_orders_url

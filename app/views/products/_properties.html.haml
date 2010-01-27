@@ -1,0 +1,7 @@
+- unless @product_properties.empty?
+  %dl#product-properties.table-display
+    - for product_property in @product_properties
+    %dt= product_property.property.presentation
+    %dd= product_property.value
+</dl>
+</haml:block>

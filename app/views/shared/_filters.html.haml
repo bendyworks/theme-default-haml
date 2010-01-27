@@ -1,0 +1,42 @@
+- if @taxon.parent
+- siblings = @taxon.parent.children
+- else
+- siblings = Taxonomy.all.map &:root
+- end
+#taxonomies.sidebar-item
+  %ul.navigation-list
+    - siblings.each do |s|
+      <li#{' class="current"' if s == @taxon}>
+      - if s.parent
+        = link_to s.name, url_for(:taxon => s.id)
+      - else
+        = link_to t("shop_by_taxonomy", :taxonomy => s.taxonomy.name.singularize), url_for(:taxon => s.id), :class => 'root'
+      </li>
+- form_for :search do |f|
+  - params[:search] ||= {}
+  %input{:name => "taxon", :type => "hidden", :value => @taxon.id}/
+  %input{:name => "per_page", :type => "hidden", :value => params[:per_page]}/
+  - filters = @taxon ? @taxon.applicable_filters : [ProductFilters.all_taxons]
+  - filters.each do |filter|
+    - labels = filter[:labels] || filter[:conds].map {|m,c| [m,m]}
+    - next if labels.empty?
+    .navigation
+      %span.category
+        = filter[:name]
+      %ul.filter_choices{:style => "list-style-type:none; padding-left: 0px;"}
+        - labels.each do |nm,val|
+          - label = "#{filter[:name]}_#{nm}".gsub(/\s+/,'_')
+        %li.nowrap
+    <input type="checkbox"
+    id="#{label}"
+    name="search[#{filter[:scope].to_s}][]"
+    value="#{val}"
+    \#{params[:search][filter[:scope]] && params[:search][filter[:scope]].include?(val.to_s) ? "checked" : ""}
+    onclick="this.form.submit();"
+    \/>
+    %label.nowrap{:for => label}
+      = nm
+    </li>
+  </ul>
+  </div>
+</haml:block>

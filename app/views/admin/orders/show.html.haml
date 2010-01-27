@@ -1,0 +1,24 @@
+.toolbar.order-links
+  = button_link_to t("edit"), edit_admin_order_url(@order.number), :icon => 'edit'
+= render :partial => 'admin/shared/order_tabs', :locals => {:current => "Order Details"}
+- if @order.bill_address
+  .adr
+    %h4
+      = link_to t("bill_address"), (@current_action=="edit" ? edit_admin_order_checkout_url(@order) : admin_order_checkout_url(@order))
+    = render :partial => 'admin/shared/address', :locals => {:address => @order.bill_address}
+- if @order.ship_address
+  .adr
+    %h4
+      = link_to t("ship_address"), (@current_action=="edit" ? edit_admin_order_checkout_url(@order) : admin_order_checkout_url(@order))
+      = t("ship_address") if @order.shipments.empty?
+    = render :partial => 'admin/shared/address', :locals => {:address => @order.ship_address}
+%hr/
+= render :partial => 'admin/shared/order_details', :locals => {:order => @order}
+- unless @order.special_instructions.blank?
+  %table.index
+    %tr
+      %th= t("shipping_instructions")
+    %tr
+      %td
+        %pre= @order.special_instructions
+= button_link_to t('continue'), admin_orders_url

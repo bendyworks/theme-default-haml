@@ -1,0 +1,52 @@
+!!!
+%html{:xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    - hook :admin_inside_head do
+      = render :partial => "shared/admin_head"
+  %body.yui-skin-sam.admin
+    /[if IE 7]
+      <div id='IE7'>
+    #wrapper
+      #header
+        - if current_user
+        %ul#login-nav
+          %li
+            = t('logged_in_as')
+            \: #{current_user.email}
+          %li= link_to t('account'), user_path(current_user)
+          %li= link_to t('logout'), logout_path
+          %li= link_to t('store'), products_path
+        </haml:block>
+        %h1.logo= link_to t("administration"), admin_path
+        #progress
+          = image_tag 'progress.gif'
+          = t('loading')
+          \...
+      #admin-menu
+        %ul
+          - hook :admin_tabs do
+            = render 'admin/shared/tabs'
+        %br.clear/
+      #sub-menu
+        = yield :sub_menu
+        %br.clear/
+      #content{:class => "#{'with-sidebar ' unless @content_for_sidebar.blank?} clear"}
+        - if flash[:error]
+        .flash.error= flash[:error]
+        </haml:block>
+        - if flash[:notice]
+        .flash.notice= flash[:notice]
+        </haml:block>
+        = yield
+        - unless @content_for_sidebar.blank?
+        %br.clear/
+        #sidebar
+          = yield :sidebar
+        </haml:block>
+      #footer
+        %p
+          = t("icons_by")
+          %a{:href => "http://pinvoke.com"} pInvoke
+    /[if IE]
+      </div>
+    = javascript_include_tag 'admin/unobtrusive_handlers'

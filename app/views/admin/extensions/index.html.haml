@@ -1,0 +1,16 @@
+%h1= t("extensions")
+%table#extensions.full-table{:width => "800px"}
+  %thead
+    %tr
+      %th.extension= t("extension")
+      %th.website= t("website")
+      %th.version= t("version")
+  %tbody
+    - for extension in @extensions
+    %tr.node.level-1
+      %td.extension
+        %h4= h extension.extension_name
+        %p= h extension.description
+      %td.website= link_to t("website"), extension.url, :target => "_blank" unless extension.url.blank?
+      %td.version= h extension.version
+    </haml:block>

@@ -1,0 +1,14 @@
+#order
+  = link_to t('back_to_store'), products_path
+  - if params.has_key? :checkout_complete
+  %br/
+  %br/
+  %h3= t('thank_you_for_your_order')
+  </haml:block>
+  - else
+    | #{link_to t('my_account'), user_path(current_user) if current_user}
+  %br/
+  %br/
+  = render :partial => 'shared/order_details', :locals => {:order => @order}
+  %br/
+  = link_to t('back_to_store'), products_path

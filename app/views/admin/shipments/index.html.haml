@@ -1,0 +1,26 @@
+.toolbar
+  %ul.actions
+    %li
+      = button_link_to t("new_shipment"), new_object_url, :icon => 'add'
+  %br.clear/
+= render :partial => 'admin/shared/order_tabs', :locals => {:current => "Shipments"}
+%table.index
+  %tr
+    %th= t("shipment_number")
+    %th= t("shipping_method")
+    %th= t("shipping_cost")
+    %th= t("tracking")
+    %th= t("state")
+    %th= "#{t('spree.date')}/#{t('spree.time')}"
+    %th
+  - @shipments.each do |shipment|
+  %tr
+    %td= shipment.number
+    %td= shipment.shipping_method.name if shipment.shipping_method
+    %td= number_to_currency shipment.cost
+    %td= shipment.tracking
+    %td= shipment.state.to_s.humanize
+    %td= shipment.shipped_at.to_s(:date_time24) if shipment.shipped_at
+    %td.actions= link_to_with_icon 'edit', t('edit'), edit_admin_order_shipment_url(@order, shipment)
+  </haml:block>
+= button_link_to t('continue'), admin_orders_url

@@ -1,0 +1,14 @@
+%h1= t("user_account")
+%table
+  %tr
+    %th= t("email")
+    %td
+      = @user.email
+  %tr
+    %th= t("roles")
+    %td
+      = list_roles(@user)
+%p
+  = link_to_edit @user
+  \&nbsp;
+  \#{link_to t('back'), collection_url}

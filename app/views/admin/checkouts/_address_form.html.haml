@@ -1,0 +1,38 @@
+%table.index
+  %tr
+    %th{:colspan => "8"}= name
+  %tr
+    %td
+      = f.label :firstname, t(:first_name)+':'
+    %td{:colspan => "3"}= f.text_field :firstname
+    %td
+      = f.label :lastname, t(:last_name)+':'
+    %td{:colspan => "3"}= f.text_field :lastname
+  %tr
+    %td
+      = f.label :address1, t(:street_address)+':'
+    %td{:colspan => "3"}= f.text_field :address1, :class => "fullwidth"
+    %td
+      = f.label :address2, t(:street_address_2)+':'
+    %td{:colspan => "3"}= f.text_field :address2, :class => "fullwidth"
+  %tr
+    %td
+      = f.label :city, t(:city)+':'
+    %td= f.text_field :city
+    %td
+      = f.label :zipcode, t(:zip)+':'
+    %td= f.text_field :zipcode, :style => "width:100px;"
+    %td
+      = f.label :state_id, t(:state)+':'
+    %td
+      %span{:id => "#{name==t('shipping_address') ? "s" : "b"}state"}
+        = f.text_field :state_name, :style => "width:150px;display:#{f.object.country.states.empty? ? 'block' : 'none' };", :disabled => !f.object.country.states.empty?
+        = f.collection_select :state_id, @states, :id, :name, {:include_blank => true}, {:style=> "width:150px;display:#{f.object.country.states.empty? ? 'none' : 'block' };", :disabled => f.object.country.states.empty?}
+    %td
+      = f.label :country_id, t(:country)+':'
+    %td
+      %span{:id => "#{name==t('shipping_address') ? "s" : "b"}country"}= f.collection_select :country_id, @countries, :id, :name, {}, {:style => 'width:150px;'}
+  %tr
+    %td
+      = f.label :phone, t(:phone)+':'
+    %td{:colspan => "7"}= f.text_field :phone

@@ -1,0 +1,29 @@
+= stylesheet_link_tag "open_id.css"
+- form_tag user_session_path do
+  #password-credentials
+    %p
+      = label :user_session, :login, t("email")
+      %br/
+      = text_field :user_session, 'login', :class => 'title'
+    %p
+      = label :user_session, :password, t("password")
+      %br/
+      = password_field :user_session, 'password', :class => 'title'
+  - if Spree::Config[:allow_openid]
+    #openid-credentials{:style => "display:none"}
+      %p
+        = label :user_session, :openid_identifier, t('OpenID', :default => 'OpenID')
+        %br/
+        = text_field :user_session, :openid_identifier, :class => "openid_url", :size => 28
+  %p
+    %label
+      = check_box :user_session, :remember_me
+      = label :user_session, :remember_me, t('remember_me')
+  %p= submit_tag t("log_in"), :class => 'button primary'
+- if Spree::Config[:allow_openid]
+  %hr/
+  %p#enable_login_via_openid
+    %a{:href => "#"}= t :enable_login_via_openid
+  %p#enable_login_via_login_password{:style => "display:none"}
+    %a{:href => "#"}= t :enable_login_via_login_password
+  = javascript_include_tag 'open_id'

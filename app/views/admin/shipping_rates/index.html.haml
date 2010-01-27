@@ -1,0 +1,23 @@
+.toolbar
+  %ul.actions
+    %li
+      = button_link_to t("new_shipping_rate"), new_object_url, :icon => 'add'
+  %br.clear/
+%h1= t("shipping_rates")
+%table.index
+  %thead
+    %th= t("shipping_method")
+    %th= t("shipping_category")
+    %th= t("calculator")
+    %th= t("action")
+  %tbody
+    - @shipping_rates.each do |shipping_rate|
+    %tr{:id => dom_id shipping_rate}
+      %td= shipping_rate.shipping_method.name
+      %td= shipping_rate.shipping_category.name
+      %td= shipping_rate.calculator.description
+      %td
+        = link_to_edit shipping_rate
+        \&nbsp;
+        \#{link_to_delete shipping_rate}
+    </haml:block>

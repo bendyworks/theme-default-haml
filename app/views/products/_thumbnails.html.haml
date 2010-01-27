@@ -1,0 +1,31 @@
+/ no need for thumnails unless there is more then one image- if product.images.size > 1
+  %ul#product-thumbnails.thumbnails
+    - product.images.each do |i|
+    %li= link_to(image_tag(i.attachment.url(:mini)), i.attachment.url(:product))
+</ul>
+</haml:block>
+- if @product.has_variants?
+- has_checked = false
+  %h4#variant-images
+    = t('images_for')
+    \:
+    %span= @selected_variant.options_text
+  %ul#variant-thumbnails.thumbnails
+    - @variants.each do |v|
+    - checked = !has_checked && (v.available?)
+    - has_checked = true if checked
+    - if checked
+    - v.images.each do |i|
+    %li= link_to(image_tag(i.attachment.url(:mini)), i.attachment.url(:product))
+</haml:block>
+</haml:block>
+</ul>
+</haml:block>
+- content_for :head do
+  %script{:charset => "utf-8", :type => "text/javascript"}
+    var images = new Array();
+    <haml:silent>     @variants.each do |v|
+    </haml:silent><haml:block>      images[<haml:loud> v.id.to_s </haml:loud>] = new Array();
+    <haml:silent>       v.images.each_with_index do |image, i|
+    </haml:silent><haml:block>        images[<haml:loud> v.id.to_s </haml:loud>][<haml:loud> i </haml:loud>] = <haml:loud> link_to(image_tag(image.attachment.url(:mini)), image.attachment.url(:product)).to_json </haml:loud>;
+    </haml:block></haml:block>

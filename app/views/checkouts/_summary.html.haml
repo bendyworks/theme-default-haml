@@ -1,0 +1,42 @@
+%h3= t(:order_summary)
+%table
+  %tbody
+    %tr
+      %td
+        %strong
+          = t('item_total')
+          \:
+      %td
+        %strong= number_to_currency @order.item_total
+  %tbody#summary-order-charges
+    - @order.charges.each do |charge|
+    %tr
+      %td
+        = charge.description
+        \:
+      %td= number_to_currency charge.amount
+    </haml:block>
+  %tbody#summary-order-credits
+    - @order.credits.each do |credit|
+    %tr
+      %td
+        = credit.description
+        \:
+      %td
+        (#{number_to_currency credit.amount})
+    </haml:block>
+  %tr
+    %td
+      %strong
+        = t('order_total')
+        \:
+    %td
+      %strong
+        %span#summary-order-total= number_to_currency @order.total
+  </tbody>
+- form_for @checkout, :url => object_url, :html => { :id => 'checkout-summary-form'} do |summary_form|
+  %label= t(:coupon_code)
+  = summary_form.text_field :coupon_code, :id => 'coupon-code', :size => 14
+  %input#post-summary{:style => "display:none", :type => "submit"}/
+  = image_tag "spinner.gif", :plugin=>"spree", :style => "display:none", :id => 'coupon_busy_indicator'
+#coupon-error

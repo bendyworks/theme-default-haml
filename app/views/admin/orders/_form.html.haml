@@ -1,0 +1,51 @@
+- form_for(@order, :url => admin_order_url(@order), :html => { :method => :put}) do |f|
+  = f.hidden_field :number
+  %table.index
+    %tbody#line-items
+      %tr
+        %th= t('item_description')
+        %th.price= t('price')
+        %th.qty= t('qty')
+        %th.total
+          %span= t('total')
+        %th.orders-actions
+      - f.fields_for :line_items do |li_form|
+        = render :partial => "admin/orders/line_item", :locals => { :f => li_form }
+    %tbody#subtotal
+      %tr#subtotal-row
+        %td{:colspan => "3"}
+          %b
+            = t('subtotal')
+            \:
+        %td.total
+          %span= number_to_currency @order.item_total
+        %td
+    %tbody#order-charges
+      - @order.charges.each do |charge|
+      %tr
+        %td{:colspan => "3"}
+          %strong= charge.description
+        %td.total
+          %span= number_to_currency charge.amount
+        %td
+</tbody>
+%tbody#order-credits
+  - @order.credits.each do |credit|
+  %tr
+    %td{:colspan => "3"}= credit.description
+    %td.total
+      %span= number_to_currency credit.amount
+    %td
+  </haml:block>
+%tbody#order-total
+  %tr
+    %td{:colspan => "3"}
+      %b
+        = t('order_total')
+        \:
+    %td.total
+      %span#order_total= number_to_currency @order.total
+    %td
+</table>
+</haml:block>
+= javascript_include_tag 'admin/orders/edit_form.js'

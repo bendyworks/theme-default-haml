@@ -1,0 +1,27 @@
+= render :partial => 'admin/shared/configuration_menu'
+.toolbar
+  %ul.actions
+    %li
+      %p= button_link_to t("new_tax_category"), new_object_url, :icon => 'add'
+  %br.clear/
+%h1= t("listing_tax_categories")
+%table.index
+  %thead
+    %tr
+      %th= t("name")
+      %th= t("description")
+      %th
+  %tbody
+    - @tax_categories.each do |tax_category|
+    %tr{:id => dom_id tax_category}
+      %td= tax_category.name
+      %td= tax_category.description
+      %td.actions
+        = link_to_edit tax_category
+        \&nbsp;
+        \#{link_to_delete tax_category}
+    </haml:block>
+    - if @tax_categories.empty?
+    %tr
+      %td{:colspan => "3"} None.
+    </haml:block>

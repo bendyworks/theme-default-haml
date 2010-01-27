@@ -1,0 +1,11 @@
+%tr{:id => dom_id(f.object)}
+  %td{:width => "300"}
+    = f.object.variant.product.name
+    = "(" + variant_options(f.object.variant) + ")" unless f.object.variant.option_values.empty?
+  %td.price{:valign => "top"}= number_to_currency f.object.price
+  %td.qty{:valign => "top"}= f.text_field :quantity, :style => "width:30px;", :class => "qty"
+  %td.total{:valign => "top"}= number_to_currency (f.object.price * f.object.quantity)
+  %td
+    = link_to_delete f.object, {:url => admin_order_line_item_url(@order.number, f.object), |
+      :dataType => "html" ,                                                                 |
+      :success => "function(r){ jQuery('#order-form-wrapper').html(r);}"}                   |

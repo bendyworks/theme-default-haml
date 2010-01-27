@@ -1,0 +1,20 @@
+= render :partial => 'admin/shared/configuration_menu'
+%h1= t("general_settings")
+%table
+  %tr
+    %th{:scope => "row"}
+      = t("site_name")
+      \:
+    %td= Spree::Config[:site_name]
+  %tr
+    %th{:scope => "row"}
+      = t("site_url")
+      \:
+    %td= Spree::Config[:site_url]
+  %tr
+    %td{:colspan => "2"}
+      = (Spree::Config[:allow_ssl_in_production] ? t("ssl_will_be_used_in_production_mode") : t("ssl_will_not_be_used_in_production_mode"))
+  %tr
+    %td{:colspan => "2"}
+      = (Spree::Config[:allow_ssl_in_development_and_test] ? t("ssl_will_be_used_in_development_and_test_modes") : t("ssl_will_not_be_used_in_development_and_test_modes"))
+%p= link_to_with_icon 'edit', t("edit"), edit_admin_general_settings_path

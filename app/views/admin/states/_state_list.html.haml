@@ -1,0 +1,22 @@
+%table.index
+  %thead
+    %tr
+      %th= t("name")
+      %th= t("abbreviation")
+      %th
+  %tbody
+    - @states.each do |state|
+    %tr
+      %td= state.name
+      %td= state.abbr
+      %td.actions
+        = link_to_with_icon 'edit', t("edit"), edit_admin_country_state_url(@country, state)
+        \&nbsp;
+        \#{link_to_with_icon 'delete', t("delete"), object_url(state), :method => :delete}
+    </haml:block>
+    - if @states.empty?
+    %tr
+      %td{:colspan => "3"} None.
+    </haml:block>
+%p
+  = button_link_to t("new_state"), new_admin_country_state_url(@country), :icon => 'add'

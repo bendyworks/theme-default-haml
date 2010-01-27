@@ -1,0 +1,31 @@
+%h2= t("selected_option_types")
+%table.option-types
+  %thead
+    %tr
+      %th= t("name")
+      %th= t("display")
+      %th= t("action")
+  %tbody
+    - @product.selected_options.each do |so|
+    %tr
+      %td= so.option_type.name
+      %td= so.option_type.presentation
+      %td
+        = link_to_remote t("remove"),                                                               |
+          :url => {:action => 'remove_option_type', :id=> @product, :product_option_type_id => so}, |
+          :before => "jQuery('#select-link').hide(); jQuery('#busy_indicator').show()",             |
+          :complete => "jQuery('#busy_indicator').hide()",                                          |
+          :update => 'option-type-listing'                                                          |
+    </haml:block>
+    - if @product.selected_options.empty?
+    %tr
+      %td{:colspan => "3"} None Selected.
+    </haml:block>
+- unless @product.new_record?
+  %span#select-link
+    = link_to_remote icon('delete') + ' ' + t("select_option_type"), {              |
+      :url => {:controller => 'option_types', :action => 'select', :id=> @product}, |
+      :update => 'new-option-type'}, :class => 'iconlink'                           |
+  = image_tag "spinner.gif", :plugin=>"spree", :style => "display:none", :id => 'busy_indicator'
+%br/
+#new-option-type

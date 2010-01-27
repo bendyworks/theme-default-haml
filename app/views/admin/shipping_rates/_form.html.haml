@@ -1,0 +1,12 @@
+%table
+  %tr
+    %td
+      = t("shipping_category")
+      \:
+    %td= f.collection_select(:shipping_category_id, @shipping_categories, :id, :name)
+  %tr
+    %td
+      = t("shipping_method")
+      \:
+    %td= f.collection_select(:shipping_method_id, @shipping_methods, :id, :name)
+= render "admin/shared/calculator_fields", :f => f

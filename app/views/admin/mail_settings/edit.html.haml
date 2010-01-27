@@ -1,0 +1,84 @@
+= render :partial => 'admin/shared/configuration_menu'
+%h1= t('mail_server_preferences')
+- form_tag(admin_mail_settings_path, :method => :put) do
+  .yui-g
+    .yui-u.first
+      %fieldset
+        %legend= t('general')
+        %p
+          %label
+            %input{:name => "preferences[enable_mail_delivery]", :type => "hidden", :value => "0"}/
+            = check_box_tag('preferences[enable_mail_delivery]', "1", Spree::Config[:enable_mail_delivery])
+            = t('enable_mail_delivery')
+        %p
+          %label
+            %input{:name => "preferences[use_mail_queue]", :type => "hidden", :value => "0"}/
+            = check_box_tag('preferences[use_mail_queue]', "1", Spree::Config[:use_mail_queue])
+            = t('enable_mail_queue')
+        %p
+          %label= t('send_mails_as')
+          %br/
+          = text_field_tag('preferences[mails_from]', Spree::Config[:mails_from], :maxlength => 256)
+          %br/
+          %span.info
+            = t("smtp_send_all_emails_as_from_following_address")
+        %p
+          %label= t('send_copy_of_all_mails_to')
+          %br/
+          = text_field_tag('preferences[mail_bcc]', Spree::Config[:mail_bcc], :size => 40, :maxlength => 256)
+          %br/
+          %span.info
+            = t("smtp_send_copy_to_this_addresses")
+      %fieldset
+        %legend= t('orders')
+        %p
+          %label= t('send_order_mails_as')
+          %br/
+          = text_field_tag('preferences[order_from]', Spree::Config[:order_from], :maxlength => 256)
+          %br/
+          %span.info
+            = t("smtp_send_order_mails_as_from_following_address")
+        %p
+          %label= t('send_copy_of_orders_mails_to')
+          %br/
+          = text_field_tag('preferences[order_bcc]', Spree::Config[:order_bcc], :size => 40, :maxlength => 256)
+          %br/
+          %span.info
+            = t("smtp_send_copy_of_orders_to_this_addresses")
+    .yui-u
+      %fieldset
+        %legend= t('smtp')
+        %p
+          %label= t("smtp_domain")
+          %br/
+          = text_field_tag('preferences[mail_domain]', Spree::Config[:mail_domain])
+        %p
+          %label= t('smtp_mail_host')
+          %br/
+          = text_field_tag('preferences[mail_host]', Spree::Config[:mail_host])
+        %p
+          %label= t('smtp_port')
+          %br/
+          = text_field_tag('preferences[mail_port]', Spree::Config[:mail_port])
+        %p
+          %label= t('secure_connection_type')
+          %br/
+          = select_tag('preferences[secure_connection_type]', |
+            options_for_select(                               |
+            AppConfiguration::SECURE_CONNECTION_TYPES,        |
+            Spree::Config[:secure_connection_type]))          |
+        %p
+          %label= t('smtp_authentication_type')
+          %br/
+          = select_tag('preferences[mail_auth_type]',       |
+            options_for_select(AppConfiguration::MAIL_AUTH, |
+            Spree::Config[:mail_auth_type]))                |
+        %p
+          %label= t('smtp_username')
+          %br/
+          = text_field_tag('preferences[smtp_username]', Spree::Config[:smtp_username])
+        %p
+          %label= t('smtp_password')
+          %br/
+          = password_field_tag('preferences[smtp_password]', Spree::Config[:smtp_password])
+  %p.form-buttons= button t('save_preferences')

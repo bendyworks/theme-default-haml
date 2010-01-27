@@ -1,0 +1,57 @@
+%table
+  %tr
+    %td
+      %label= t("name")
+    %td= text_field :billing_integration, :name, {"style" => "width:200px"}
+  %tr
+    %td
+      %label= t("description")
+    %td= text_area :billing_integration, :description, {:cols => 60, :rows => 4}
+  %tr
+    %td
+      %label= t("environment")
+    %td
+      = collection_select(:billing_integration, :environment, Configuration.configurations.keys, :to_s, :titleize, {}, {:id => "gtwy-env"})
+  %tr
+    %td
+      %label= t("server")
+    %td
+      %label.sub
+        = radio_button(:billing_integration, :server, "test" )
+        = t("test")
+      \&nbsp;
+      %label.sub
+        = radio_button(:billing_integration, :server, "live" )
+        = t("live")
+  %tr
+    %td
+      %label= t("test_mode")
+    %td
+      %label.sub
+        = radio_button(:billing_integration, :test_mode, true )
+        = t("yes")
+      \&nbsp;
+      %label.sub
+        = radio_button(:billing_integration, :test_mode, false )
+        = t("no")
+  %tr
+    %td
+      %label= t("active")
+    %td
+      %label.sub
+        = radio_button(:billing_integration, :active, true )
+        = t("yes")
+      \&nbsp;
+      %label.sub
+        = radio_button(:billing_integration, :active, false )
+        = t("no")
+%h2= t('settings')
+#preference-settings
+  = f.label(:type, t("provider"))
+  = collection_select(:billing_integration, :type, @providers, :to_s, :name, {}, {:id => "gtwy-type"})
+  - unless @object.new_record?
+    = preference_fields(@object, f)
+    - if @object.respond_to?(:preferences)
+  #calculator-settings-warning{:style => "color:#FF0000"}= t('integration_settings_warning')
+  </haml:block>
+  </haml:block>

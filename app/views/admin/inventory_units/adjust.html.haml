@@ -1,0 +1,24 @@
+= error_messages_for(:level)
+- form_tag do
+  %br/
+  %br/
+  %h1= t("inventory_adjustment")
+  %table.basic-table
+    %thead
+      %tr
+        %th= t("sku")
+        %th= t("product")
+        %th= t("options")
+        %th= t("current")
+        %th= t("adjustment")
+    %tbody
+      %tr
+        %td= @variant.sku
+        %td= @variant.product.name
+        %td= variant_options @variant
+        %td= on_hand(@variant)
+        %td
+          = text_field :level, :adjustment, :class => "quantity"
+  = submit_tag t('update')
+  = t("or")
+  = link_to t('cancel'), :controller => 'overview', :action => :index

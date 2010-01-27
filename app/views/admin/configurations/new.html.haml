@@ -1,0 +1,9 @@
+%h2= t("new_configuration_template")
+= error_messages_for :app_configuration
+- form_for @app_configuration, :url => admin_configurations_path do |f|
+  %p
+    %strong= t("name")
+    %br/
+    = f.text_field :name
+  %p
+    = f.submit t("create")

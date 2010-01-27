@@ -1,0 +1,7 @@
+= error_messages_for :user
+%h1= t("new_user")
+- form_for(:user, :url => collection_url) do |f|
+  = render :partial => "form", :locals => { :f => f }
+  %p.form-buttons
+    = button t("create")
+    = link_to t('cancel'), collection_url

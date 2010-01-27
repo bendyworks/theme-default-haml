@@ -1,0 +1,14 @@
+= error_messages_for :user
+- @body_id = 'signup'
+#new-customer
+  %h2= t("new_customer")
+  - hook :signup do
+    - form_for(@user) do |f|
+      - hook :signup_inside_form do
+        = render 'shared/user_form', :f => f
+  %p= submit_tag t("create"), :class => 'button primary'
+  </haml:block>
+  </haml:block>
+  = t("or")
+  = link_to t("login_as_existing"), login_path
+  </haml:block>

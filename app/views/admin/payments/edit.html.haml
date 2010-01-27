@@ -1,0 +1,59 @@
+= render :partial => 'admin/shared/order_tabs', :locals => {:current => "Payments"}
+%h2= t("activerecord.models.#{@object.class.to_s.underscore}.one")
+= error_messages_for :creditcard_payment
+- form_for(object, :url => object_url, :html => { :method => :put}) do |payment_form|
+  = hidden_field_tag :payment_type, object.class.to_s.underscore
+  %p
+    %label
+      = t("amount")
+      \:
+    </td>
+    = object.amount
+  - if object.class == CreditcardPayment
+    %fieldset
+      %legend= t('creditcard')
+      %table.index
+        %tr
+          %th{:colspan => "6"}= t('card_details')
+        %tr
+          %td
+            %label
+              = t("card_number")
+              \:
+          %td
+            XXXX-XXXX-XXXX-#{object.creditcard.last_digits}
+          %td
+            %label
+              = t("expiration")
+              \:
+          %td
+            = object.creditcard.month
+            \/#{object.creditcard.year}
+          %td
+            %label
+              = t("card_code")
+              \:
+          %td
+            = object.creditcard.verification_value
+        %tr
+          %td
+            %label
+              = t("maestro_or_solo_cards")
+              \:
+          %td
+            = object.creditcard.issue_number
+          %td
+            %label
+              = t('start_date')
+              \:
+          %td{:colspan => "3"}
+            = object.creditcard.start_month
+            \/#{object.creditcard.start_year}
+      - payment_form.fields_for :order do |order_form|
+        - order_form.fields_for :checkout do |checkout_form|
+          - checkout_form.fields_for :bill_address do |ba_form|
+            = render :partial => "admin/checkouts/address_form", :locals => {:f => ba_form, :name => t('billing_address')}
+  %p.form-buttons
+    = button t('continue')
+</haml:block>
+  \&nbsp;

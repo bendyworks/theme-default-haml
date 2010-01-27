@@ -1,0 +1,29 @@
+= render :partial => 'admin/shared/configuration_menu'
+.toolbar
+  %ul.actions
+    %li
+      = button_link_to t("new_zone"), new_object_url, :icon => 'add'
+      </p>
+  %br.clear/
+%h1= t("zones")
+%table.index
+  %thead
+    %tr
+      %th= order @search, :by => :name,        :as => t("name")
+      %th= order @search, :by => :description, :as => t("description")
+      %th
+  %tbody
+    - @collection.each do |zone|
+    %tr{:id => dom_id zone}
+      %td= zone.name
+      %td= zone.description
+      %td.actions
+        = link_to_edit zone
+        \&nbsp;
+        \#{link_to_delete zone}
+    </haml:block>
+    - if @collection.empty?
+    %tr
+      %td{:colspan => "2"} None.
+    </haml:block>
+= will_paginate(:prev => "&#171; #{t('previous')}", :next => "#{t('next')} &#187;")
