@@ -3,163 +3,143 @@
   .hidden { display: none; }
 %fieldset#billing
   - checkout_form.fields_for :bill_address do |bill_form|
-  %legend= t("billing_address")
-  .inner
-    %p.field &nbsp;
-    %p#bfname.field
-      = bill_form.label :firstname, t(:first_name)
-      %br/
-      = bill_form.text_field :firstname, :class => 'required'
-      %span.req *
-    %p#blname.field
-      = bill_form.label :lastname, t(:last_name)
-      %br/
-      = bill_form.text_field :lastname, :class => 'required'
-      %span.req *
-    %p#baddress.field
-      = bill_form.label :address1, t(:street_address)
-      %br/
-      = bill_form.text_field :address1, :class => 'required'
-      %span.req *
-    %p#baddress2.field
-      = bill_form.label :address2, t(:street_address_2)
-      %br/
-      = bill_form.text_field :address2
-    %p#bcity.field
-      = bill_form.label :city
-      %br/
-      = bill_form.text_field :city, :class => 'required'
-      %span.req *
-    - if Spree::Config[:address_requires_state]
-    %p.field
-      %span#bstate
-        - have_states = !@checkout.bill_address.country.states.empty?
-        = bill_form.label :state, t(:state)
+    %legend= t("billing_address")
+    .inner
+      %p.field &nbsp;
+      %p#bfname.field
+        = bill_form.label :firstname, t(:first_name)
         %br/
-    %noscript
-      = bill_form.text_field :state_name, :class => 'required'
-    - state_elements = [
-    - bill_form.collection_select(:state_id, @states,
-    - :id, :name,
-    - {:include_blank => true},
-    - {:class => have_states ? "required" : "hidden",
-    - :disabled => !have_states}) +
-    - bill_form.text_field(:state_name,
-    - :class => !have_states ? "required" : "hidden",
-    - :disabled => have_states)
-    - ].join.gsub('"', "'").gsub("\n", "")
-    %script{:charset => "utf-8", :language => "javascript", :type => "text/javascript"}
-      \//
-      :cdata
-        document.write("#{state_elements}");
-        \//
-    </span>
-    %span.req *
-    </p>
-    </haml:block>
-    %p#bzip.field
-      = bill_form.label :zipcode, t(:zip)
-      %br/
-      = bill_form.text_field :zipcode, :class => 'required'
-      %span.req *
-    %p#bcountry.field
-      = bill_form.label :country_id, t(:country)
-      %br/
-      %span#bcountry= bill_form.collection_select :country_id, @countries, :id, :name, {}, {:class => 'required'}
-    %p#bphone.field
-      = bill_form.label :phone
-      %br/
-      = bill_form.text_field :phone, :class => 'required'
-      %span.req *
-    - if Spree::Config[:alternative_billing_phone]
-    %p#baltphone
-      = bill_form.label :alternative_phone
-      %br/
-      = bill_form.text_field :alternative_phone
-    </haml:block>
-    </p>
-  </haml:block>
+        = bill_form.text_field :firstname, :class => 'required'
+        %span.req *
+      %p#blname.field
+        = bill_form.label :lastname, t(:last_name)
+        %br/
+        = bill_form.text_field :lastname, :class => 'required'
+        %span.req *
+      %p#baddress.field
+        = bill_form.label :address1, t(:street_address)
+        %br/
+        = bill_form.text_field :address1, :class => 'required'
+        %span.req *
+      %p#baddress2.field
+        = bill_form.label :address2, t(:street_address_2)
+        %br/
+        = bill_form.text_field :address2
+      %p#bcity.field
+        = bill_form.label :city
+        %br/
+        = bill_form.text_field :city, :class => 'required'
+        %span.req *
+      - if Spree::Config[:address_requires_state]
+        %p.field
+          %span#bstate
+            - have_states = !@checkout.bill_address.country.states.empty?
+            = bill_form.label :state, t(:state)
+            %br/
+            %noscript= bill_form.text_field :state_name, :class => 'required'
+            - state_elements = [                                |
+            - bill_form.collection_select(:state_id, @states,   |
+            - :id, :name,                                       |
+            - {:include_blank => true},                         |
+            - {:class => have_states ? "required" : "hidden",   |
+            - :disabled => !have_states}) +                     |
+            - bill_form.text_field(:state_name,                 |
+            - :class => !have_states ? "required" : "hidden",   |
+            - :disabled => have_states)                         |
+            - ].join.gsub('"', "'").gsub("\n", "");             |
+            :javascript
+              document.write("#{state_elements}");
+          %span.req *
+      %p#bzip.field
+        = bill_form.label :zipcode, t(:zip)
+        %br/
+        = bill_form.text_field :zipcode, :class => 'required'
+        %span.req *
+      %p#bcountry.field
+        = bill_form.label :country_id, t(:country)
+        %br/
+        %span#bcountry= bill_form.collection_select :country_id, @countries, :id, :name, {}, {:class => 'required'}
+      %p#bphone.field
+        = bill_form.label :phone
+        %br/
+        = bill_form.text_field :phone, :class => 'required'
+        %span.req *
+      - if Spree::Config[:alternative_billing_phone]
+        %p#baltphone
+          = bill_form.label :alternative_phone
+          %br/
+          = bill_form.text_field :alternative_phone
 %fieldset#shipping
   - checkout_form.fields_for :ship_address do |ship_form|
-  %legend= t("shipping_address")
-  %p.field
-    %label#use_billing{:for => "checkout_same_address"}
-      = check_box_tag 'checkout[use_billing]', '1', @checkout.use_billing
-      = t("use_billing_address")
-  .inner
-    %p#sfname.field
-      = ship_form.label :firstname, t(:first_name)
-      %br/
-      = ship_form.text_field :firstname, :class => 'required'
-      %span.req *
-    %p#slname.field
-      = ship_form.label :lastname, t(:last_name)
-      %br/
-      = ship_form.text_field :lastname, :class => 'required'
-      %span.req *
-    %p#saddress.field
-      = ship_form.label :address1, t(:street_address)
-      %br/
-      = ship_form.text_field :address1, :class => 'required'
-      %span.req *
-    %p#saddress2.field
-      = ship_form.label :address2, t(:street_address_2)
-      %br/
-      = ship_form.text_field :address2
-    %p#scity.field
-      = ship_form.label :city, t(:city)
-      %br/
-      = ship_form.text_field :city, :class => 'required'
-      %span.req *
-    - if Spree::Config[:address_requires_state]
+    %legend= t("shipping_address")
     %p.field
-      %span#sstate
-        - have_states = !@checkout.ship_address.country.states.empty?
-        = ship_form.label :state, t(:state)
+      %label#use_billing{:for => "checkout_same_address"}
+        = check_box_tag 'checkout[use_billing]', '1', @checkout.use_billing
+        = t("use_billing_address")
+    .inner
+      %p#sfname.field
+        = ship_form.label :firstname, t(:first_name)
         %br/
-    %noscript
-      = ship_form.text_field :state_name, :class => 'required'
-    - state_elements = [
-    - ship_form.collection_select(:state_id, @states,
-    - :id, :name,
-    - {:include_blank => true},
-    - {:class => have_states ? "required" : "hidden",
-    - :disabled => !have_states}) +
-    - ship_form.text_field(:state_name,
-    - :class => !have_states ? "required" : "hidden",
-    - :disabled => have_states)
-    - ].join.gsub('"', "'").gsub("\n", "")
-    %script{:charset => "utf-8", :language => "javascript", :type => "text/javascript"}
-      \//
-      :cdata
-        document.write("#{state_elements}");
-        \//
-    </span>
-    %span.req *
-    </p>
-    </haml:block>
-    %p#szip.field
-      = ship_form.label :zipcode, t(:zip)
-      %br/
-      = ship_form.text_field :zipcode, :class => 'required'
-      %span.req *
-    %p#scountry.field
-      = ship_form.label :country_id, t(:country)
-      %br/
-      %span#scountry= ship_form.collection_select :country_id, @countries, :id, :name, {}, {:class => 'required'}
-    %p#sphone.field
-      = ship_form.label :phone, t(:phone)
-      %br/
-      = ship_form.text_field :phone, :class => 'required'
-      %span.req *
-    - if Spree::Config[:alternative_shipping_phone]
-    %p#saltphone
-      = ship_form.label :alternative_phone, t(:alternative_phone)
-      %br/
-      = ship_form.text_field :alternative_phone
-    </haml:block>
-    </p>
-  </haml:block>
+        = ship_form.text_field :firstname, :class => 'required'
+        %span.req *
+      %p#slname.field
+        = ship_form.label :lastname, t(:last_name)
+        %br/
+        = ship_form.text_field :lastname, :class => 'required'
+        %span.req *
+      %p#saddress.field
+        = ship_form.label :address1, t(:street_address)
+        %br/
+        = ship_form.text_field :address1, :class => 'required'
+        %span.req *
+      %p#saddress2.field
+        = ship_form.label :address2, t(:street_address_2)
+        %br/
+        = ship_form.text_field :address2
+      %p#scity.field
+        = ship_form.label :city, t(:city)
+        %br/
+        = ship_form.text_field :city, :class => 'required'
+        %span.req *
+      - if Spree::Config[:address_requires_state]
+        %p.field
+          %span#sstate
+            - have_states = !@checkout.ship_address.country.states.empty?
+            = ship_form.label :state, t(:state)
+            %br/
+            %noscript= ship_form.text_field :state_name, :class => 'required'
+            - state_elements = [                              |
+            - ship_form.collection_select(:state_id, @states, |
+            - :id, :name,                                     |
+            - {:include_blank => true},                       |
+            - {:class => have_states ? "required" : "hidden", |
+            - :disabled => !have_states}) +                   |
+            - ship_form.text_field(:state_name,               |
+            - :class => !have_states ? "required" : "hidden", |
+            - :disabled => have_states)                       |
+            - ].join.gsub('"', "'").gsub("\n", "");           |
+            :javascript
+              document.write("#{state_elements}");
+          %span.req *
+      %p#szip.field
+        = ship_form.label :zipcode, t(:zip)
+        %br/
+        = ship_form.text_field :zipcode, :class => 'required'
+        %span.req *
+      %p#scountry.field
+        = ship_form.label :country_id, t(:country)
+        %br/
+        %span#scountry= ship_form.collection_select :country_id, @countries, :id, :name, {}, {:class => 'required'}
+      %p#sphone.field
+        = ship_form.label :phone, t(:phone)
+        %br/
+        = ship_form.text_field :phone, :class => 'required'
+        %span.req *
+      - if Spree::Config[:alternative_shipping_phone]
+        %p#saltphone
+          = ship_form.label :alternative_phone, t(:alternative_phone)
+          %br/
+          = ship_form.text_field :alternative_phone
 %hr.space/
 .form-buttons
   %input.continue.button.primary{:onclick => "$('#checkout_form_address').validate();", :type => "submit", :value => t("save_and_continue")}/
