@@ -1,0 +1,21 @@
+<h1><%= t("user_account") %></h1>        
+
+<table>
+  <tr>
+    <th><%= t("email") %></th>
+    <td>
+      <%= @user.email %>
+    </td>
+  </tr>  
+  <tr>
+    <th><%= t("roles") %></th>
+    <td>
+      <%= list_roles(@user) %>
+    </td>
+  </tr>
+</table>
+
+<p>
+  <%= link_to_edit @user %> &nbsp;
+  <%= link_to t('back'), collection_url %>
+</p>

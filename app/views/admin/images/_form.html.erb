@@ -1,0 +1,12 @@
+<tr>
+  <td><%= t("filename") %>:</td>
+  <td><%= f.file_field :attachment %></td>
+</tr>
+<% if @product.has_variants? %>
+  <tr>
+    <td><%= Variant.human_name %>:</td>
+    <td><%= f.select :viewable_id, @variants %></td>
+  </tr>
+<% else %>
+  <%= hidden_field_tag :product_id, @product.id %>
+<% end %>

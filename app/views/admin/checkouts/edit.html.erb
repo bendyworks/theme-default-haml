@@ -1,0 +1,22 @@
+<%= render :partial => 'admin/shared/order_tabs', :locals => {:current => "Customer Details"} %>
+
+<% if @order.state == "in_progress" %>
+  <div id="add-line-item">
+    <fieldset>
+      <legend><%= t('customer_search') %></legend>
+      <%= label_tag :customer_search, t("name") %>
+      <%= text_field_tag :customer_search,  {}, :class => 'fullwidth title'  %>
+    </fieldset>
+  </div>
+<% end %>
+
+<%=error_messages_for :checkout %>
+<% form_for(@checkout, :url => admin_order_checkout_url(@order), :html => { :method => :put}) do |f| %>
+  <%= render :partial => "form", :locals => {:f => f} %>
+<% end %>
+
+<% content_for :head do %>
+  <%= javascript_include_tag 'admin/checkouts/edit.js' %>
+  <%= stylesheet_link_tag 'admin/edit_checkouts.css' %>
+  <%= javascript_include_tag  'checkout', '/states' %>
+<% end %>

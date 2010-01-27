@@ -1,0 +1,39 @@
+<div class='toolbar order-links'>
+  <%= button_link_to t("edit"), edit_admin_order_url(@order.number), :icon => 'edit' %>
+</div>
+
+<%= render :partial => 'admin/shared/order_tabs', :locals => {:current => "Order Details"} %>
+
+<% if @order.bill_address %>
+  <div class='adr'>
+    <h4>
+      <%= link_to t("bill_address"), (@current_action=="edit" ? edit_admin_order_checkout_url(@order) : admin_order_checkout_url(@order)) %>
+    </h4>
+    <%= render :partial => 'admin/shared/address', :locals => {:address => @order.bill_address} %>
+  </div>
+<% end %>
+<% if @order.ship_address %>
+  <div class='adr'>
+    <h4>
+      <%= link_to t("ship_address"), (@current_action=="edit" ? edit_admin_order_checkout_url(@order) : admin_order_checkout_url(@order)) %>
+      <%= t("ship_address") if @order.shipments.empty? %>
+    </h4>
+    <%= render :partial => 'admin/shared/address', :locals => {:address => @order.ship_address} %>
+  </div>
+  <% end %>
+<hr />
+
+<%= render :partial => 'admin/shared/order_details', :locals => {:order => @order} -%>
+
+<% unless @order.special_instructions.blank? %>
+  <table class="index">
+    <tr>
+      <th><%= t("shipping_instructions") %></th>
+    </tr>
+    <tr>
+      <td><pre><%= @order.special_instructions %></pre></td>
+    </tr>
+  </table>
+<% end %>
+
+<%= button_link_to t('continue'), admin_orders_url %>
