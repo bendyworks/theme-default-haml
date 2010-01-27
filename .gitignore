@@ -1,0 +1,9 @@
+*.log
+*.tmproj
+app/stylesheets/
+capybara-*.html
+db/*.sql
+log/*
+public/assets
+rerun.txt
+tmp

@@ -4,7 +4,7 @@ cd -P -- "$(dirname -- "$0")" && pwd -P
 )
 script_dir=$dir
 sass_dir="app/stylesheets"
-css_dir="../../../public/stylesheets"
+css_dir="public/stylesheets"
 image_dir="images"
 javascript_dir="javascripts"
 
