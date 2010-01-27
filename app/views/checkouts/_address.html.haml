@@ -37,16 +37,10 @@
             = bill_form.label :state, t(:state)
             %br/
             %noscript= bill_form.text_field :state_name, :class => 'required'
-            - state_elements = [                                |
-            - bill_form.collection_select(:state_id, @states,   |
-            - :id, :name,                                       |
-            - {:include_blank => true},                         |
-            - {:class => have_states ? "required" : "hidden",   |
-            - :disabled => !have_states}) +                     |
-            - bill_form.text_field(:state_name,                 |
-            - :class => !have_states ? "required" : "hidden",   |
-            - :disabled => have_states)                         |
-            - ].join.gsub('"', "'").gsub("\n", "");             |
+            - se1_html = {:class => have_states ? "required" : "hidden", :disabled => !have_states}
+            - se1 = bill_form.collection_select(:state_id, @states, :id, :name, {:include_blank => true}, se1_html)
+            - se2 = bill_form.text_field(:state_name, :class => (!have_states ? "required" : "hidden"), :disabled => have_states)
+            - state_elements = [se1 + se2].join.gsub('"', "'").gsub("\n", "")
             :javascript
               document.write("#{state_elements}");
           %span.req *
@@ -108,16 +102,10 @@
             = ship_form.label :state, t(:state)
             %br/
             %noscript= ship_form.text_field :state_name, :class => 'required'
-            - state_elements = [                              |
-            - ship_form.collection_select(:state_id, @states, |
-            - :id, :name,                                     |
-            - {:include_blank => true},                       |
-            - {:class => have_states ? "required" : "hidden", |
-            - :disabled => !have_states}) +                   |
-            - ship_form.text_field(:state_name,               |
-            - :class => !have_states ? "required" : "hidden", |
-            - :disabled => have_states)                       |
-            - ].join.gsub('"', "'").gsub("\n", "");           |
+            - se1_html = {:class => (have_states ? "required" : "hidden"), :disabled => !have_states}
+            - se1 = ship_form.collection_select(:state_id, @states, :id, :name, {:include_blank => true}, se1_html)
+            - se2 = ship_form.text_field(:state_name, :class => (!have_states ? "required" : "hidden"), :disabled => have_states)
+            - state_elements = [se1 + se2].join.gsub('"', "'").gsub("\n", "")
             :javascript
               document.write("#{state_elements}");
           %span.req *
