@@ -3,6 +3,5 @@
     %p
       = t("powered_by")
       %a{:href => "http://spreecommerce.com/"} Spree
-  .right
-    = render 'shared/language_bar' if Spree::Config[:allow_locale_switching]
+  .right= render 'shared/language_bar' if Spree::Config[:allow_locale_switching]
 = render 'shared/google_analytics'

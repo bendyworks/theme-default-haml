@@ -18,7 +18,6 @@
       = f.label :openid_identifier, t('OpenID', :default => 'OpenID')
       %br/
       = f.text_field :openid_identifier, :class => 'openid_url'
-- if Spree::Config[:allow_openid]
   %p#enable_login_via_openid{:style => password_style(@user)}
     %a{:href => "#"}= t :enable_login_via_openid
   %p#enable_login_via_login_password{:style => openid_style(@user)}

@@ -1,17 +1,15 @@
 - if @taxon.parent
-- siblings = @taxon.parent.children
+  - siblings = @taxon.parent.children
 - else
-- siblings = Taxonomy.all.map &:root
-- end
+  - siblings = Taxonomy.all.map &:root
 #taxonomies.sidebar-item
   %ul.navigation-list
     - siblings.each do |s|
-      <li#{' class="current"' if s == @taxon}>
-      - if s.parent
-        = link_to s.name, url_for(:taxon => s.id)
-      - else
-        = link_to t("shop_by_taxonomy", :taxonomy => s.taxonomy.name.singularize), url_for(:taxon => s.id), :class => 'root'
-      </li>
+      %li{:class => (s == @taxon ? 'current' : nil)}
+        - if s.parent
+          = link_to s.name, url_for(:taxon => s.id)
+        - else
+          = link_to t("shop_by_taxonomy", :taxonomy => s.taxonomy.name.singularize), url_for(:taxon => s.id), :class => 'root'
 - form_for :search do |f|
   - params[:search] ||= {}
   %input{:name => "taxon", :type => "hidden", :value => @taxon.id}/
@@ -21,22 +19,14 @@
     - labels = filter[:labels] || filter[:conds].map {|m,c| [m,m]}
     - next if labels.empty?
     .navigation
-      %span.category
-        = filter[:name]
+      %span.category= filter[:name]
       %ul.filter_choices{:style => "list-style-type:none; padding-left: 0px;"}
         - labels.each do |nm,val|
           - label = "#{filter[:name]}_#{nm}".gsub(/\s+/,'_')
-        %li.nowrap
-    <input type="checkbox"
-    id="#{label}"
-    name="search[#{filter[:scope].to_s}][]"
-    value="#{val}"
-    \#{params[:search][filter[:scope]] && params[:search][filter[:scope]].include?(val.to_s) ? "checked" : ""}
-    onclick="this.form.submit();"
-    \/>
-    %label.nowrap{:for => label}
-      = nm
-    </li>
-  </ul>
-  </div>
-</haml:block>
+          %li.nowrap
+            -# had problems with the following, so am hard-coding it
+            -# f.check_box "taxons_id_equals_any[]", {}, taxon.id
+            - checked = params[:search][filter[:scope]]
+            - checked &&= params[:search][filter[:scope]].include?(val.to_s) ? "checked" : ""
+            %input{:type => 'checkbox', :id => label, :name => "search[#{filter[:scope]}][]", :value => val, :checked => checked, :onclick => 'this.form.submit();'}
+            %label.nowrap{:for => label}= nm

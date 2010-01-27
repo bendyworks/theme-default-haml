@@ -7,43 +7,36 @@
       %th.total
         %span= t('total')
     - @order.line_items.each do |item|
-    %tr
-      %td{:width => "300"}
-        = item.variant.product.name
-        = "(" + variant_options(item.variant) + ")" unless item.variant .option_values.empty?
-      %td.price= number_to_currency item.price
-      %td.qty= item.quantity
-      %td.total
-        %span= number_to_currency (item.price * item.quantity)
-    </haml:block>
+      %tr
+        %td{:width => "300"}
+          = item.variant.product.name
+          = "(" + variant_options(item.variant) + ")" unless item.variant .option_values.empty?
+        %td.price= number_to_currency item.price
+        %td.qty= item.quantity
+        %td.total
+          %span= number_to_currency(item.price * item.quantity)
   %tbody#subtotal
     %tr#subtotal-row.total
       %td{:colspan => "3"}
-        %b
-          = t('subtotal')
-          \:
+        %b #{t('subtotal')}:
       %td.total
         %span= number_to_currency @order.item_total
   %tbody#order-charges
     - @order.charges.each do |charge|
-    %tr.total
-      %td{:colspan => "3"}
-        %strong= charge.description
-      %td.total
-        %span= number_to_currency charge.amount
-    </haml:block>
+      %tr.total
+        %td{:colspan => "3"}
+          %strong= charge.description
+        %td.total
+          %span= number_to_currency charge.amount
   %tbody#order-credits
     - @order.credits.each do |credit|
-    %tr.total
-      %td{:colspan => "3"}= credit.description
-      %td.total
-        %span= number_to_currency credit.amount
-    </haml:block>
+      %tr.total
+        %td{:colspan => "3"}= credit.description
+        %td.total
+          %span= number_to_currency credit.amount
   %tbody#order-total
     %tr.total
       %td{:colspan => "3"}
-        %b
-          = t('order_total')
-          \:
+        %b #{t('order_total')}:
       %td.total
         %span#order_total= number_to_currency @order.total
