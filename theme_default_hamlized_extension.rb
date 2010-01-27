@@ -4,7 +4,7 @@ class ThemeDefaultHamlizedExtension < Spree::Extension
   url "http://github.com/bendyworks/spree-hamlized"
 
   def self.require_gems(config)
-    # config.gem 'compass', :version => '>= 0.8.17'
+    config.gem 'compass', :version => '>= 0.8.17'
     # config.gem 'haml', :version => '>=2.2.16'
   end
   
