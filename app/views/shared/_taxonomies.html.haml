@@ -1,8 +1,8 @@
 #taxonomies.sidebar-item
   - get_taxonomies.each do |taxonomy|
     %ul.navigation-list
-      %li{:class => (@taxon && @taxon == taxonomy.root ? 'current' : nil}
+      %li{:class => (@taxon && @taxon == taxonomy.root ? 'current' : nil)}
         = link_to t("shop_by_taxonomy", :taxonomy => taxonomy.name.singularize), seo_url(taxonomy.root), :class => 'root'
       - taxonomy.root.children.each do |taxon|
-        %li{:class => (@taxon and ([@taxon] + @taxon.ancestors).include?(taxon) ? 'current' : nil)}
+        %li{:class => (@taxon and ([@taxon] + @taxon.ancestors).include?(taxon) ? 'current' : '')}
           = link_to taxon.name, seo_url(taxon)

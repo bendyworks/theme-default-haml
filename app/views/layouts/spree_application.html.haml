@@ -8,7 +8,7 @@
       - @body_class = 'two-col'
     - else
       - @body_class = 'one-col'
-  %body{:class => @body_class, :id => (@body_id ? @body_id : nil)}
+  %body{:class => @body_class, :id => (@body_id ? @body_id : '')}
     #header.container
       #login-bar
         %ul#nav-bar= render 'shared/nav_bar'

@@ -5,7 +5,7 @@
 #taxonomies.sidebar-item
   %ul.navigation-list
     - siblings.each do |s|
-      %li{:class => (s == @taxon ? 'current' : nil)}
+      %li{:class => (s == @taxon ? 'current' : '')}
         - if s.parent
           = link_to s.name, url_for(:taxon => s.id)
         - else
