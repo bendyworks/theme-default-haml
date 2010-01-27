@@ -4,7 +4,7 @@ button, a.button, input.button
   +rounded_corners(0.3em)
   :background
     :color #EFEFEF !important
-    :image = image_url('bg-button.png') "important"
+    :image url(bg-button.png) !important
     :position center left !important
     :repeat repeat-x !important
   :border
@@ -35,7 +35,7 @@ button, a.button, input.button
     :font-weight bold
     :color #000
   &:hover
-    :background-image = image_url('bg-button-hover.png') !important
+    :background-image url(bg-button-hover.png) !important
   &.large
     +rounded_corners(0.3em)
     :font-size 1.4em !important

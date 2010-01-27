@@ -18,7 +18,7 @@
       :overflow hidden
       &:hover
         :background
-          :image = image_url('menu-hover.png')
+          :image url(menu-hover.png)
           :position right center
           :repeat no-repeat
     &.current
@@ -26,7 +26,7 @@
       a
         :width 180px
         :background
-          :image = image_url('menu-current.png')
+          :image url(menu-current.png)
           :position right center
           :repeat no-repeat
         :white-space nowrap
@@ -79,12 +79,12 @@ ul#nav-bar
         :padding-right 40px
         :background
           :color transparent
-          :image = image_url('cart-empty_x32.png')
+          :image url(cart-empty_x32.png)
           :position center right
           :repeat no-repeat
         :display block
         &.full
-          :background-image = image_url('cart-full_x32.png')
+          :background-image url(cart-full_x32.png)
 
 .pagination
   :padding-top 10px

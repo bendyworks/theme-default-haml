@@ -5,9 +5,10 @@ cd -P -- "$(dirname -- "$0")" && pwd -P
 script_dir=$dir
 sass_dir="app/stylesheets"
 css_dir="public/stylesheets"
-image_dir="images"
+image_dir="public/images/"
 javascript_dir="javascripts"
 
 cd `dirname $0`;
 cd ..;
+echo compass --sass-dir=app/stylesheets  --css-dir="$css_dir" --image-dir="$image_dir" --javascript-dir="$javascript_dir" --watch;
 compass --sass-dir=app/stylesheets  --css-dir="$css_dir" --image-dir="$image_dir" --javascript-dir="$javascript_dir" --watch;
