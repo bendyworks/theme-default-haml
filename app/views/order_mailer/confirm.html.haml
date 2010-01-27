@@ -5,7 +5,7 @@ Please review and retain the following order information for your records.
 \============================================================
 Order Summary
 \============================================================
-- for item in @order.line_items
+- @order.line_items.each do |item|
   = item.variant.sku
   = item.variant.product.name
   = variant_options(item.variant)
@@ -13,7 +13,7 @@ Order Summary
 \============================================================
 Subtotal: #{number_to_currency @order.item_total}
 - @order.adjustments.each do |adjustment|
-  = "#{adjustment.description}: #{number_to_currency adjustment.amount}"
+  #{adjustment.description}: #{number_to_currency adjustment.amount}
 Order Total: #{number_to_currency @order.total}
 
 

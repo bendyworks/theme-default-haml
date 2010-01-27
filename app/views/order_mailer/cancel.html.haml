@@ -5,7 +5,7 @@ Your order has been CANCELED.  Please retain this cancellation information for y
 \============================================================
 Order Summary [CANCELED]
 \============================================================
-- for item in @order.line_items
+- @order.line_items.each do |item|
   = item.variant.sku
   = item.variant.product.name
   = variant_options(item.variant)
@@ -13,5 +13,5 @@ Order Summary [CANCELED]
 \============================================================
 Subtotal: #{number_to_currency @order.item_total}
 - @order.charges.each do |charge|
-  = "#{charge.description}: #{number_to_currency charge.amount}"
+  #{charge.description}: #{number_to_currency charge.amount}
 Order Total: #{number_to_currency @order.total}

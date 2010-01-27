@@ -10,10 +10,9 @@
         = image_tag variant.images.first.attachment.url(:small)
   %td
     - hook :cart_item_description, locals do
-    %h4= link_to variant.product.name,  product_path(variant.product)
-    = variant_options variant
-    = truncate(variant.product.description, :length => 100, :omission => "...")
-    </haml:block>
+      %h4= link_to variant.product.name,  product_path(variant.product)
+      = variant_options variant
+      = truncate(variant.product.description, :length => 100, :omission => "...")
   %td
     - hook :cart_item_price, locals do
       = product_price(line_item)
