@@ -1,10 +1,10 @@
 %h2= ProductGroup.human_name
 %p
-  = ProductGroup.human_attribute_name(:name)
-  \: #{@product_group.name}
+  #{ProductGroup.human_attribute_name(:name)}:
+  = @product_group.name
 %p
-  = ProductGroup.human_attribute_name(:url)
-  \: #{link_to @product_group.permalink, "/pg/#{@product_group.permalink}"}
+  #{ProductGroup.human_attribute_name(:url)}:
+  = link_to @product_group.permalink, "/pg/#{@product_group.permalink}"
 %h2
   = ProductGroup.human_attribute_name(:product_scopes)
   (#{@product_group.product_scopes.count})
@@ -15,10 +15,7 @@
       %th= ProductScope.human_attribute_name(:arguments)
   %tbody
     - @product_group.product_scopes.each do |product_scope|
-      <tr #{!product_scope.valid? ? "class='invalid'":''}>
-      %td
-        = product_scope.to_sentence
-      %td
-        = product_scope.arguments.join(", ")
-      </tr>
+      %tr{:class => (!product_scope.valid? ? 'invalid' : '')}
+        %td= product_scope.to_sentence
+        %td= product_scope.arguments.join(", ")
 = render :partial => 'preview.html'

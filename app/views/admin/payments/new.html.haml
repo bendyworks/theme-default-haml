@@ -6,13 +6,12 @@
 %p
   %label= t('type')
   %br/
-  = select_tag :payment_type,                                                                                                                                                                                                                                                             |
-    options_for_select(  [:creditcard_payment, :cheque_payment].map {|payment_type| [t("activerecord.models.#{payment_type}.one"), new_admin_order_payment_path(:payment_type => payment_type.to_s)] }, new_admin_order_payment_path(:payment_type => @payment.class.to_s.underscore)  ), |
-    :class => 'jump_menu'                                                                                                                                                                                                                                                                 |
+  - sel_opts = [:creditcard_payment, :cheque_payment].map do |payment_type|
+    - [t("activerecord.models.#{payment_type}.one"), new_admin_order_payment_path(:payment_type => payment_type.to_s)]
+  = select_tag :payment_type, options_for_select(sel_opts, new_admin_order_payment_path(:payment_type => @payment.class.to_s.underscore)), :class => 'jump_menu'
 - form_for @payment, :url => collection_url do |f|
   = hidden_field_tag :payment_type, object.class.to_s.underscore
   = render "form", :f => f
-  %p.form-buttons
-    = button t('continue')
+  %p.form-buttons= button t('continue')
 - content_for :head do
   = javascript_include_tag 'admin/payments/new'

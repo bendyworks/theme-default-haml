@@ -7,25 +7,22 @@
       %th= t("action")
   %tbody
     - @product.selected_options.each do |so|
-    %tr
-      %td= so.option_type.name
-      %td= so.option_type.presentation
-      %td
-        = link_to_remote t("remove"),                                                               |
-          :url => {:action => 'remove_option_type', :id=> @product, :product_option_type_id => so}, |
-          :before => "jQuery('#select-link').hide(); jQuery('#busy_indicator').show()",             |
-          :complete => "jQuery('#busy_indicator').hide()",                                          |
-          :update => 'option-type-listing'                                                          |
-    </haml:block>
+      %tr
+        %td= so.option_type.name
+        %td= so.option_type.presentation
+        %td
+          - link_url = {:action => 'remove_option_type', :id=> @product, :product_option_type_id => so}
+          - link_before = "jQuery('#select-link').hide(); jQuery('#busy_indicator').show()"
+          - link_complete = "jQuery('#busy_indicator').hide()"
+          = link_to_remote t("remove"), :url => link_url, :before => link_before, :complete => link_complete, :update => 'option-type-listing'
     - if @product.selected_options.empty?
-    %tr
-      %td{:colspan => "3"} None Selected.
-    </haml:block>
+      %tr
+        %td{:colspan => "3"} None Selected.
 - unless @product.new_record?
   %span#select-link
-    = link_to_remote icon('delete') + ' ' + t("select_option_type"), {              |
-      :url => {:controller => 'option_types', :action => 'select', :id=> @product}, |
-      :update => 'new-option-type'}, :class => 'iconlink'                           |
+    - link_text = icon('delete') + ' ' + t("select_option_type")
+    - link_url = {:controller => 'option_types', :action => 'select', :id=> @product}
+    = link_to_remote link_text, {:url => link_url, :update => 'new-option-type'}, :class => 'iconlink'
   = image_tag "spinner.gif", :plugin=>"spree", :style => "display:none", :id => 'busy_indicator'
 %br/
 #new-option-type

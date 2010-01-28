@@ -4,10 +4,7 @@
 - form_for(object, :url => object_url, :html => { :method => :put}) do |payment_form|
   = hidden_field_tag :payment_type, object.class.to_s.underscore
   %p
-    %label
-      = t("amount")
-      \:
-    </td>
+    %label #{t("amount")}:
     = object.amount
   - if object.class == CreditcardPayment
     %fieldset
@@ -17,43 +14,26 @@
           %th{:colspan => "6"}= t('card_details')
         %tr
           %td
-            %label
-              = t("card_number")
-              \:
+            %label #{t("card_number")}:
+          %td XXXX-XXXX-XXXX-#{object.creditcard.last_digits}
           %td
-            XXXX-XXXX-XXXX-#{object.creditcard.last_digits}
+            %label #{t("expiration")}:
+          %td #{object.creditcard.month}/#{object.creditcard.year}
           %td
-            %label
-              = t("expiration")
-              \:
-          %td
-            = object.creditcard.month
-            \/#{object.creditcard.year}
-          %td
-            %label
-              = t("card_code")
-              \:
-          %td
-            = object.creditcard.verification_value
+            %label #{t("card_code")}:
+          %td= object.creditcard.verification_value
         %tr
           %td
-            %label
-              = t("maestro_or_solo_cards")
-              \:
+            %label #{t("maestro_or_solo_cards")}:
+          %td= object.creditcard.issue_number
           %td
-            = object.creditcard.issue_number
-          %td
-            %label
-              = t('start_date')
-              \:
-          %td{:colspan => "3"}
-            = object.creditcard.start_month
-            \/#{object.creditcard.start_year}
+            %label #{t('start_date')}:
+          %td{:colspan => "3"} #{object.creditcard.start_month}/#{object.creditcard.start_year}
       - payment_form.fields_for :order do |order_form|
         - order_form.fields_for :checkout do |checkout_form|
           - checkout_form.fields_for :bill_address do |ba_form|
             = render :partial => "admin/checkouts/address_form", :locals => {:f => ba_form, :name => t('billing_address')}
   %p.form-buttons
     = button t('continue')
-</haml:block>
-  \&nbsp;
+-#= link_to t("capture").titleize, capture_admin_order_payment_url(@order, @creditcard_payment), :confirm => t('are_you_sure_you_want_to_capture') if object.can_capture?
+\&nbsp;

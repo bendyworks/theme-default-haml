@@ -4,72 +4,65 @@
     - hook :admin_product_form_left, locals do
       - f.field_container :name do
         = f.label :name, t("name")
-    %span.required *
-    %br/
-    = f.text_field :name, :class => 'fullwidth title'
-    = f.error_message_on :name
-    </haml:block>
-    - f.field_container :description do
-      = f.label :description, t("description")
-    %br/
-    = f.text_area :description, {:cols => 60, :rows => 4, :class => 'fullwidth'}
-    = f.error_message_on :description
-    </haml:block>
-    </haml:block>
+        %span.required *
+        %br/
+        = f.text_field :name, :class => 'fullwidth title'
+        = f.error_message_on :name
+      - f.field_container :description do
+        = f.label :description, t("description")
+        %br/
+        = f.text_area :description, {:cols => 60, :rows => 4, :class => 'fullwidth'}
+        = f.error_message_on :description
   .yui-u
     - hook :admin_product_form_right, locals do
       - f.field_container :price do
         = f.label :price, t("master_price")
-    %span.required *
-    %br/
-    = f.text_field :price, :value => number_with_precision(@product.price, 2)
-    = f.error_message_on :price
-    </haml:block>
-    - f.field_container :cost_price do
-      = f.label :cost_price, t("cost_price")
-    %br/
-    = f.text_field :cost_price, :value => number_with_precision(@product.cost_price, 2)
-    = f.error_message_on :cost_price
-    </haml:block>
-    %p
-      = f.label :available_on, t("available_on")
-      %br/
-      = f.error_message_on :available_on
-      = f.unobtrusive_date_picker :available_on
-    %p
-      = f.label :sku, t("sku")
-      %br/
-      = f.text_field :sku, :size => 16
-    - unless @product.has_variants?
-    %p
-      = f.label :on_hand, t("on_hand")
-      %br/
-      = f.text_field :on_hand, :size => 4
-    %ul#shipping-specs
-      %li
-        = f.label :weight, t("weight")
-        = f.text_field :weight, :size => 4
-      %li
-        = f.label :height, t("height")
-        = f.text_field :height, :size => 4
-      %li
-        = f.label :width, t("width")
-        = f.text_field :width, :size => 4
-      %li
-        = f.label :depth, t("depth")
-        = f.text_field :depth, :size => 4
-    </haml:block>
-    %p
-      = f.label :shipping_category_id, t("shipping_categories")
-      %br/
-      = f.collection_select(:shipping_category_id, @shipping_categories, :id, :name, {:include_blank => true}, {"style" => "width:200px"})
-      = f.error_message_on :shipping_category
-    %p
-      = f.label :tax_category_id, t("tax_category")
-      %br/
-      = f.collection_select(:tax_category_id, @tax_categories, :id, :name, {:include_blank => true}, {"style" => "width:200px"})
-      = f.error_message_on :tax_category
-    </haml:block>
+        %span.required *
+        %br/
+        = f.text_field :price, :value => number_with_precision(@product.price, 2)
+        = f.error_message_on :price
+      - f.field_container :cost_price do
+        = f.label :cost_price, t("cost_price")
+        %br/
+        = f.text_field :cost_price, :value => number_with_precision(@product.cost_price, 2)
+        = f.error_message_on :cost_price
+      %p
+        = f.label :available_on, t("available_on")
+        %br/
+        = f.error_message_on :available_on
+        = f.unobtrusive_date_picker :available_on
+      %p
+        = f.label :sku, t("sku")
+        %br/
+        = f.text_field :sku, :size => 16
+      - unless @product.has_variants?
+        %p
+          = f.label :on_hand, t("on_hand")
+          %br/
+          = f.text_field :on_hand, :size => 4
+        %ul#shipping-specs
+          %li
+            = f.label :weight, t("weight")
+            = f.text_field :weight, :size => 4
+          %li
+            = f.label :height, t("height")
+            = f.text_field :height, :size => 4
+          %li
+            = f.label :width, t("width")
+            = f.text_field :width, :size => 4
+          %li
+            = f.label :depth, t("depth")
+            = f.text_field :depth, :size => 4
+      %p
+        = f.label :shipping_category_id, t("shipping_categories")
+        %br/
+        = f.collection_select(:shipping_category_id, @shipping_categories, :id, :name, {:include_blank => true}, {"style" => "width:200px"})
+        = f.error_message_on :shipping_category
+      %p
+        = f.label :tax_category_id, t("tax_category")
+        %br/
+        = f.collection_select(:tax_category_id, @tax_categories, :id, :name, {:include_blank => true}, {"style" => "width:200px"})
+        = f.error_message_on :tax_category
 %h2= t("metadata")
 - hook :admin_product_form_meta, locals do
   %p

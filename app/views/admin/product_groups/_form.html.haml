@@ -8,50 +8,44 @@
     = f.error_message_on :name
   - f.field_container :order_scope do
     = f.label :order_scope, t("order")
-    = select_tag("order_scope", options_for_select(                                                                        |
-              Scopes::Product::ORDERING.collect{|p| [ t(:name, :scope =>[:product_scopes, :scopes, p]), p ] }, order_scope |
-      ))                                                                                                                   |
+    - scopes = Scopes::Product::ORDERING.collect{|p| [ t(:name, :scope =>[:product_scopes, :scopes, p]), p ] }
+    = select_tag("order_scope", options_for_select(scopes, order_scope))
 .product-scopes
   - [:search, :taxon, :price, :values].each do |group_name|
     - scopes = Scopes::Product::SCOPES[group_name]
-  %fieldset
-    %legend= t(:name, :scope => [:product_scopes, :groups, group_name])
-    - unless t(:description, :scope => [:product_scopes, :groups, group_name], :default => "").blank?
-    %p= t(:description, :scope => [:product_scopes, :groups, group_name])
-    </haml:block>
-    %ul
-      - scopes.each_pair do |scope_name, arguments|
-      %li
-        = check_box_tag("product_scope[#{scope_name}][active]", "1", scopes_hash[scope_name.to_s])
-        = label_tag("product_scope[#{scope_name}][active]", t(:name, :scope => [:product_scopes, :scopes, scope_name]))
-        %br/
-        - arguments.each_with_index do |arg_name, i|
-        .scope-argument
-          = label_tag("product_scope[#{scope_name}][arguments][]", t(arg_name, :scope => [:product_scopes, :scopes, scope_name, :args]))
-          %br/
-          = text_field_tag("product_scope[#{scope_name}][arguments][]", scopes_hash[scope_name.to_s] && scopes_hash[scope_name.to_s][i])
-        </haml:block>
-        - unless t(:description, :scope => [:product_scopes, :scopes, scope_name], :default => "").blank?
-        %p= t(:description, :scope => [:product_scopes, :scopes, scope_name], :default => "")
-        </haml:block>
-      </haml:block>
-      %li{:style => "clear: both; list-style: none;"}
-  </haml:block>
+    %fieldset
+      %legend= t(:name, :scope => [:product_scopes, :groups, group_name])
+      - unless t(:description, :scope => [:product_scopes, :groups, group_name], :default => "").blank?
+        %p= t(:description, :scope => [:product_scopes, :groups, group_name])
+      %ul
+        - scopes.each_pair do |scope_name, arguments|
+          %li
+            - cb_name = "product_scope[#{scope_name}][active]"
+            = check_box_tag(cb_name, "1", scopes_hash[scope_name.to_s])
+            = label_tag(cb_name, t(:name, :scope => [:product_scopes, :scopes, scope_name]))
+            %br/
+            - arguments.each_with_index do |arg_name, i|
+              .scope-argument
+                - tf_name = "product_scope[#{scope_name}][arguments][]"
+                = label_tag(tf_name, t(arg_name, :scope => [:product_scopes, :scopes, scope_name, :args]))
+                %br/
+                = text_field_tag(tf_name, scopes_hash[scope_name.to_s] && scopes_hash[scope_name.to_s][i])
+            - unless t(:description, :scope => [:product_scopes, :scopes, scope_name], :default => "").blank?
+              %p= t(:description, :scope => [:product_scopes, :scopes, scope_name], :default => "")
+        %li{:style => "clear: both; list-style: none;"}
 %fieldset
   %legend= t(:preview)
   #products-preview
 = button t("preview"), nil, "submit", :id => "preview"
-- javascript_tag do
+:javascript
   jQuery("#preview").click(function(){
-  
-  jQuery.ajax({
-  data: $("#product-group-form :input[name!='_method']").serialize(),
-  success: function(request){
-  jQuery('#products-preview').html(request);
-  },
-  type: 'post',
-  url: '/admin/product_groups/preview'
-  });
-  
-  return(false)
+    jQuery.ajax({
+        data: $("#product-group-form :input[name!='_method']").serialize(),
+        success: function(request){
+        jQuery('#products-preview').html(request);
+      },
+      type: 'post',
+      url: '/admin/product_groups/preview'
+    });
+    return(false);
   });

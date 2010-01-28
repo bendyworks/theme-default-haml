@@ -1,14 +1,13 @@
 - number ||= 0
 %tr.product_property
   %td
-    = text_field :product_property, :property_name,                              |
-      :name => property_fu_name(product_property, number),                       |
-      :value => product_property.property ? product_property.property.name : "", |
-      :class => 'autocomplete'                                                   |
+    - tf_name = property_fu_name(product_property, number)
+    - tf_value = product_property.property ? product_property.property.name : ""
+    = text_field :product_property, :property_name, :name => tf_name, :value => tf_value, :class => 'autocomplete'
   %td
-    = text_field :product_property, :property_value,        |
-      :name => property_fu_value(product_property, number), |
-      :value => product_property.value                      |
+    - tf_name = property_fu_value(product_property, number)
+    - tf_value = product_property.value
+    = text_field :product_property, :property_value, :name => tf_name, :value => tf_value
   %td
     %a.product_property_remove_link.iconlink{:href => "#"}
       = icon('delete')

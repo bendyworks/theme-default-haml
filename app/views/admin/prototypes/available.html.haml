@@ -5,15 +5,11 @@
       %th
   %tbody
     - @prototypes.each do |prototype|
-    %tr{:id => "row_#{prototype.id}"}
-      %td= prototype.name
-      %td.actions
-        = link_to icon('add') + ' ' + t("select"), select_admin_prototype_url(prototype), |
-          :class => 'ajax iconlink select_properties_from_prototype'                      |
-    </haml:block>
+      %tr{:id => "row_#{prototype.id}"}
+        %td= prototype.name
+        %td.actions
+          - link_text = icon('add') + ' ' + t("select")
+          = link_to link_text, select_admin_prototype_url(prototype), :class => 'ajax iconlink select_properties_from_prototype'
     - if @prototypes.empty?
-    %tr
-      %td{:colspan => "2"}
-        - t("none")
-        \.
-    </haml:block>
+      %tr
+        %td{:colspan => "2"} #{t("none")}.

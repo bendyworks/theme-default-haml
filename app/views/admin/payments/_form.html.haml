@@ -5,20 +5,15 @@
   %fieldset
     %legend= t('creditcard')
     - if current_gateway.payment_profiles_supported? and @previous_cards.any?
-    %p.field
-      - for card in @previous_cards
-      %label
-        = radio_button_tag :card, card.id, card == @previous_cards.first
-        = card.display_number
-        %br/
-%label
-  = radio_button_tag :card, 'new'
-  Use a new card
-</p>
-</haml:block>
-<div id="card_form"#{' style="display:none"' if current_gateway.payment_profiles_supported? and @previous_cards.any?}>
-\#{render 'card_form', :f => f}
-\#{render 'bill_address_form', :f => f}
-</div>
-</fieldset>
-</haml:block>
+      %p.field
+        - @previous_cards.each do |card|
+          %label
+            = radio_button_tag :card, card.id, card == @previous_cards.first
+            = card.display_number
+            %br/
+        %label
+          = radio_button_tag :card, 'new'
+          Use a new card
+    #card_form{:style => (current_gateway.payment_profiles_supported? and @previous_cards.any? ? 'display:none;' : '')}
+      = render 'card_form', :f => f
+      = render 'bill_address_form', :f => f

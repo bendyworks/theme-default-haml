@@ -14,30 +14,26 @@
         %td{:colspan => "3"}= @product.product_properties.empty? ? "#{t("none")}." : ""
   %input{:name => "clear_product_properties", :type => "hidden", :value => "true"}/
   %p
-    = f.add_associated_link(icon('add') + ' ' + t("add_product_properties"), |
-      @product.product_properties.build,                                     |
-      {:onclick => "jQuery('#none').hide();", :class => 'iconlink'})         |
+    - link_text = icon('add') + ' ' + t("add_product_properties")
+    - link_html_opts = {:onclick => "jQuery('#none').hide();", :class => 'iconlink'}
+    = f.add_associated_link(link_text, @product.product_properties.build, link_html_opts)
     \&nbsp;&nbsp;
     %span#new_ptype_link
-      = link_to_remote t("select_from_prototype"), |
-        :url => available_admin_prototypes_url,    |
-        :method => :get,                           |
-        :update => "prototypes"                    |
+      = link_to_remote t("select_from_prototype"), :url => available_admin_prototypes_url, :method => :get, :update => "prototypes"
   #prototypes
   = image_tag "spinner.gif", :plugin=>"spree", :style => "display:none", :id => 'busy_indicator'
   %br/
   = render :partial => 'admin/shared/edit_resource_links'
-- javascript_tag do
+:javascript
   var properties = "#{@properties}".split(' ');
   $("a.product_property_remove_link").live("click", function(){
-  jQuery(this).parents('.product_property').remove();
-  return false;
+    jQuery(this).parents('.product_property').remove();
+    return false;
   });
-  
   $("#product_properties input.autocomplete").live("keydown", function(){
-  already_auto_completed = $(this).is('ac_input');
-  if (!already_auto_completed) {
-  $(this).autocomplete(properties);
-  $(this).focus();
-  }
+    already_auto_completed = $(this).is('ac_input');
+    if (!already_auto_completed) {
+      $(this).autocomplete(properties);
+      $(this).focus();
+    }
   });

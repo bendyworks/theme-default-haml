@@ -11,12 +11,6 @@
           %th= t(:action)
       %tbody
         - pg_products.each do |product|
-        %tr
-          %td
-            = link_to product.name, product_url(product)
-          %td
-            = link_to t(:edit), edit_admin_product_path(product)
-</tbody>
-</table>
-</div>
-</haml:block>
+          %tr
+            %td= link_to product.name, product_url(product)
+            %td= link_to t(:edit), edit_admin_product_path(product)

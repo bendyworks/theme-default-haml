@@ -1,7 +1,6 @@
 .toolbar
   %ul.actions
-    %li
-      = button_link_to t("new_product_group"), new_object_url, :icon => 'add'
+    %li= button_link_to t("new_product_group"), new_object_url, :icon => 'add'
   %br.clear/
 %h1
   = t("listing", :scope => :actions)
@@ -16,16 +15,17 @@
       %th= t(:action)
   %tbody
     - @product_groups.each do |pg|
-    %tr
-      %td= link_to pg.name, object_path(pg)
-      %td= link_to "/pg/#{pg.permalink}", "/pg/#{pg.permalink}"
-      %td= pg.product_scopes.map(&:to_sentence).join("<br />")
-      %td= pg.valid? ? pg.products.count : t("product group is invalid")
-      %td
-        = link_to t(:show), object_path(pg)
-        \&nbsp; | &nbsp;
-        \#{link_to t(:edit), edit_object_path(pg)} &nbsp; | &nbsp;
-        \#{link_to t(:destroy), object_path(pg), :method => :delete} &nbsp; | &nbsp;
-        \#{link_to t(:preview), "/pg/#{pg.permalink}"}
-    </haml:block>
+      %tr
+        %td= link_to pg.name, object_path(pg)
+        %td= link_to "/pg/#{pg.permalink}", "/pg/#{pg.permalink}"
+        %td= pg.product_scopes.map(&:to_sentence).join("<br />")
+        %td= pg.valid? ? pg.products.count : t("product group is invalid")
+        %td
+          = link_to t(:show), object_path(pg)
+          \&nbsp; | &nbsp;
+          = link_to t(:edit), edit_object_path(pg)
+          \&nbsp; | &nbsp;
+          = link_to t(:destroy), object_path(pg), :method => :delete
+          \&nbsp; | &nbsp;
+          = link_to t(:preview), "/pg/#{pg.permalink}"
 = will_paginate(:prev => "&#171; #{t('previous')}", :next => "#{t('next')} &#187;")

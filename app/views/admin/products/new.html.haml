@@ -4,37 +4,34 @@
   %fieldset
     - f.field_container :name do
       = f.label :name, t("name")
-    %span.required *
-    %br/
-    = f.text_field :name, :class => 'fullwidth title'
-    = f.error_message_on :name
-.yui-gb
-  .yui-u.first
-    - unless @product.has_variants?
-      - f.field_container :sku do
-        = f.label :sku, t("sku")
-    %br/
-    = f.text_field :sku, :size => 16
-    = f.error_message_on :sku
-    </haml:block>
-    </haml:block>
-    %p
-      = f.label :prototype_id, t("prototype")
+      %span.required *
       %br/
-      = f.collection_select :prototype_id, Prototype.all, :id, :name, :include_blank => true
-  .yui-u
-    - f.field_container :price do
-      = f.label :price, t("master_price")
-    %span.required *
-    %br/
-    = f.text_field :price
-    = f.error_message_on :price
-    </haml:block>
-    %p
-      = f.label :available_on, t("available_on")
-      %br/
-      = f.error_message_on :available_on
-      = f.unobtrusive_date_picker :available_on, :style=>"width:150px"
-= render :partial => 'admin/shared/new_resource_links'
-</fieldset>
-</haml:block>#{javascript_tag "datePickerController.create();"}
+      = f.text_field :name, :class => 'fullwidth title'
+      = f.error_message_on :name
+    .yui-gb
+      .yui-u.first
+        - unless @product.has_variants?
+          - f.field_container :sku do
+            = f.label :sku, t("sku")
+            %br/
+            = f.text_field :sku, :size => 16
+            = f.error_message_on :sku
+        %p
+          = f.label :prototype_id, t("prototype")
+          %br/
+          = f.collection_select :prototype_id, Prototype.all, :id, :name, :include_blank => true
+      .yui-u
+        - f.field_container :price do
+          = f.label :price, t("master_price")
+          %span.required *
+          %br/
+          = f.text_field :price
+          = f.error_message_on :price
+        %p
+          = f.label :available_on, t("available_on")
+          %br/
+          = f.error_message_on :available_on
+          = f.unobtrusive_date_picker :available_on, :style=>"width:150px"
+    = render :partial => 'admin/shared/new_resource_links'
+:javascript
+  datePickerController.create();
