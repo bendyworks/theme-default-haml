@@ -24,7 +24,6 @@
     [{
     attributes : { "id" : "#{@taxonomy.root.id}" }, data : "#{@taxonomy.root.name}", state : "open",
     children : [
-    - is_closed = lambda {|t| t.children.empty? ? '' : ',state : "closed"'}
-    = @taxonomy.root.children.map {|t| "{attributes : { id : \"#{t.id}\"}, data : \"#{t.name}\"#{is_closed(t)}}"}.join(',')
+    = @taxonomy.root.children.map {|t| "{attributes : { id : \"#{t.id}\"}, data : \"#{t.name}\"#{t.children.empty? ? '' : ',state : "closed"'}}"}.join(',')
     ]
     }];
