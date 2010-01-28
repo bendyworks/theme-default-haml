@@ -1,27 +1,17 @@
 %table
   %tr
-    %td
-      = t("code")
-      \:
+    %td #{t("code")}:
     %td= f.text_field :code, {"style" => "width:200px"}
   %tr
-    %td
-      = t("description")
-      \:
+    %td #{t("description")}:
     %td= f.text_field :description, {"style" => "width:200px"}
   %tr
-    %td
-      = t("usage_limit")
-      \:
+    %td #{t("usage_limit")}:
     %td= f.text_field :usage_limit, {"style" => "width:200px"}
   %tr
-    %td
-      = t("combine")
-      \:
+    %td #{t("combine")}:
     %td= f.check_box :combine
   %tr
-    %td
-      = t("expiration")
-      \:
+    %td #{t("expiration")}:
     %td= date_select :coupon, :expires_at, :prompt => true, :use_month_numbers => true
 = render "admin/shared/calculator_fields", :f => f

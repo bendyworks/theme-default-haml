@@ -4,32 +4,30 @@
   %tr
     %th= t("activerecord.attributes.creditcard.number")
     %th= t('transactions')
-  - for creditcard in collection
-  %tr
-    %td= creditcard.display_number
-    %td
-      - txns = creditcard.txns.original.map {|original_txn| [original_txn, original_txn.creditcard_txns] }.flatten.compact
-      - if txns.any?
-      %table
-        %tr
-          %th= t('type')
-          %th= 'date'
-          %th= t('amount')
-          %th= t('response_code')
-          %th
-        - for txn in txns
-        %tr
-          %td
-            = '&rarr;' if txn.original_txn
-            = txn.txn_type_name
-          %td= txn.created_at.to_date
-          %td= number_to_currency txn.amount
-          %td= txn.response_code
-          %td
-            = link_to t('capture'), capture_admin_order_creditcard_creditcard_txn_path(@order, creditcard, txn), :method => :post, :confirm => t('are_you_sure')
-            |
-            \#{link_to t('void'), void_admin_order_creditcard_creditcard_txn_path(@order, creditcard, txn), :method => :post, :confirm => t('are_you_sure')} |
-            \#{link_to t('refund'), refund_admin_order_creditcard_creditcard_txn_path(@order, creditcard, txn)}
-        </haml:block>
-      </haml:block>
-  </haml:block>
+  - collection.each do |creditcard|
+    %tr
+      %td= creditcard.display_number
+      %td
+        - txns = creditcard.txns.original.map {|original_txn| [original_txn, original_txn.creditcard_txns] }.flatten.compact
+        - if txns.any?
+          %table
+            %tr
+              %th= t('type')
+              %th= 'date'
+              %th= t('amount')
+              %th= t('response_code')
+              %th
+            - txns.each do |txn|
+              %tr
+                %td
+                  = '&rarr;' if txn.original_txn
+                  = txn.txn_type_name
+                %td= txn.created_at.to_date
+                %td= number_to_currency txn.amount
+                %td= txn.response_code
+                %td
+                  = link_to t('capture'), capture_admin_order_creditcard_creditcard_txn_path(@order, creditcard, txn), :method => :post, :confirm => t('are_you_sure')
+                  |
+                  = link_to t('void'), void_admin_order_creditcard_creditcard_txn_path(@order, creditcard, txn), :method => :post, :confirm => t('are_you_sure')
+                  |
+                  = link_to t('refund'), refund_admin_order_creditcard_creditcard_txn_path(@order, creditcard, txn)

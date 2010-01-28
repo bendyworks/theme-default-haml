@@ -29,16 +29,12 @@
         });
         state_select.enable().show();;
         state_input.hide().disable();
-
       } else {
         state_input.enable().show();
         state_select.hide().disable();
       }
-
     };
-
     jQuery(document).ready(function(){
       $('span#bcountry select').change(function() { update_state('b'); });
       $('span#scountry select').change(function() { update_state('s'); });
     });
-  

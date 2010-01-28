@@ -10,8 +10,7 @@
   %tr
     %td
       %label= t("environment")
-    %td
-      = collection_select(:billing_integration, :environment, Configuration.configurations.keys, :to_s, :titleize, {}, {:id => "gtwy-env"})
+    %td= collection_select(:billing_integration, :environment, Configuration.configurations.keys, :to_s, :titleize, {}, {:id => "gtwy-env"})
   %tr
     %td
       %label= t("server")
@@ -52,6 +51,4 @@
   - unless @object.new_record?
     = preference_fields(@object, f)
     - if @object.respond_to?(:preferences)
-  #calculator-settings-warning{:style => "color:#FF0000"}= t('integration_settings_warning')
-  </haml:block>
-  </haml:block>
+      #calculator-settings-warning{:style => "color:#FF0000"}= t('integration_settings_warning')

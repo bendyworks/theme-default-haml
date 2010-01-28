@@ -2,14 +2,10 @@
 %h1= t("general_settings")
 %table
   %tr
-    %th{:scope => "row"}
-      = t("site_name")
-      \:
+    %th{:scope => "row"} #{t("site_name")}:
     %td= Spree::Config[:site_name]
   %tr
-    %th{:scope => "row"}
-      = t("site_url")
-      \:
+    %th{:scope => "row"} #{t("site_url")}:
     %td= Spree::Config[:site_url]
   %tr
     %td{:colspan => "2"}

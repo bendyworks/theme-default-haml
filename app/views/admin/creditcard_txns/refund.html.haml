@@ -6,5 +6,4 @@
     %p
       %label{:for => "amount"}= t("amount")
       = text_field_tag :amount, @creditcard_txn.amount
-    %p.form-buttons
-      = button t("make_refund")
+    %p.form-buttons= button t("make_refund")

@@ -1,7 +1,6 @@
 .toolbar
   %ul.actions
-    %li
-      = button_link_to t("new_adjustment"), new_admin_order_adjustment_url(@order), :icon => 'add'
+    %li= button_link_to t("new_adjustment"), new_admin_order_adjustment_url(@order), :icon => 'add'
   %br.clear/
 = render :partial => 'admin/shared/order_tabs', :locals => {:current => "Adjustments"}
 %table.index
@@ -12,14 +11,13 @@
     %th= t("amount")
     %th
   - @adjustments.each do |adjustment|
-  %tr{:id => dom_id(adjustment)}
-    %td= adjustment.created_at.to_s(:date_time24)
-    %td= adjustment.description
-    %td= adjustment.class.to_s
-    %td= number_to_currency(adjustment.amount)
-    %td
-      = link_to_edit adjustment
-      \&nbsp;
-      \#{link_to_delete adjustment}
-  </haml:block>
+    %tr{:id => dom_id(adjustment)}
+      %td= adjustment.created_at.to_s(:date_time24)
+      %td= adjustment.description
+      %td= adjustment.class.to_s
+      %td= number_to_currency(adjustment.amount)
+      %td
+        = link_to_edit adjustment
+        \&nbsp;
+        = link_to_delete adjustment
 = button_link_to t('continue'), admin_orders_url

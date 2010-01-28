@@ -1,8 +1,7 @@
 = render :partial => 'admin/shared/configuration_menu'
 .toolbar
   %ul.actions
-    %li
-      = button_link_to t("new_billing_integration"), new_object_url, :icon => 'add'
+    %li= button_link_to t("new_billing_integration"), new_object_url, :icon => 'add'
   %br.clear/
 %h1= t("billing_integrations")
 %table.index
@@ -16,15 +15,14 @@
     %th= t("action")
   %tbody
     - @billing_integrations.each do |integration|
-    %tr{:id => dom_id integration}
-      %td{:width => "120px"}= integration.name
-      %td{:width => "140px"}= integration.type
-      %td{:width => "100px"}= integration.environment.to_s.titleize
-      %td{:width => "60px"}= integration.server.to_s.titleize
-      %td{:width => "60px"}= integration.test_mode.to_s.titleize
-      %td{:width => "60px"}= integration.active.to_s.titleize
-      %td{:width => "140px"}
-        = link_to_edit integration
-        \&nbsp;
-        \#{link_to_delete integration}
-    </haml:block>
+      %tr{:id => dom_id integration}
+        %td{:width => "120px"}= integration.name
+        %td{:width => "140px"}= integration.type
+        %td{:width => "100px"}= integration.environment.to_s.titleize
+        %td{:width => "60px"}= integration.server.to_s.titleize
+        %td{:width => "60px"}= integration.test_mode.to_s.titleize
+        %td{:width => "60px"}= integration.active.to_s.titleize
+        %td{:width => "140px"}
+          = link_to_edit integration
+          \&nbsp;
+          = link_to_delete integration
