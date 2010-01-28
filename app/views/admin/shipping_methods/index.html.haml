@@ -1,7 +1,6 @@
 .toolbar
   %ul.actions
-    %li
-      = button_link_to t("new_shipping_method"), new_object_url, :icon => 'add'
+    %li= button_link_to t("new_shipping_method"), new_object_url, :icon => 'add'
   %br.clear/
 %h1= t("shipping_methods")
 %table.index
@@ -12,12 +11,11 @@
     %th= t("action")
   %tbody
     - @shipping_methods.each do |shipping_method|
-    %tr{:id => dom_id shipping_method}
-      %td{:width => "100px"}= shipping_method.name
-      %td{:width => "100px"}= shipping_method.zone.name
-      %td{:width => "100px"}= shipping_method.calculator.to_s
-      %td
-        = link_to_edit shipping_method
-        \&nbsp;
-        \#{link_to_delete shipping_method}
-    </haml:block>
+      %tr{:id => dom_id(shipping_method)}
+        %td{:width => "100px"}= shipping_method.name
+        %td{:width => "100px"}= shipping_method.zone.name
+        %td{:width => "100px"}= shipping_method.calculator.to_s
+        %td
+          = link_to_edit shipping_method
+          \&nbsp;
+          = link_to_delete shipping_method
