@@ -6,7 +6,6 @@
       %th= t("description")
   %tbody
     - @reports.each do |key, value|
-    %tr
-      %td= link_to t(value[:name].downcase.gsub(" ","_")), send("#{key}_admin_reports_url".to_sym)
-      %td= t(value[:description].downcase.gsub(" ","_"))
-    </haml:block>
+      %tr
+        %td= link_to t(value[:name].downcase.gsub(" ","_")), send("#{key}_admin_reports_url".to_sym)
+        %td= t(value[:description].downcase.gsub(" ","_"))

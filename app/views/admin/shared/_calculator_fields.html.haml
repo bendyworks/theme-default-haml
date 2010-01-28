@@ -6,6 +6,4 @@
     - f.fields_for :calculator do |calculator_form|
       = preference_fields(@object.calculator, calculator_form)
     - if @object.calculator.respond_to?(:preferences)
-  #calculator-settings-warning= t('calculator_settings_warning')
-  </haml:block>
-  </haml:block>
+      #calculator-settings-warning= t('calculator_settings_warning')

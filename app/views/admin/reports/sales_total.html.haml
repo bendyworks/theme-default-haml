@@ -1,26 +1,17 @@
-%h1
-  = t("sales_totals")
+%h1= t("sales_totals")
 %table.admin-report
   %tbody
     %tr
-      %th{:scope => "row"}
-        = t("item_total")
-        \:
+      %th{:scope => "row"} #{t("item_total")}:
       %td{:align => "right"}= number_to_currency @item_total
     %tr
-      %th{:scope => "row"}
-        = t("charge_total")
-        \:
+      %th{:scope => "row"} #{t("charge_total")}:
       %td{:align => "right"}= number_to_currency @charge_total
     %tr
-      %th{:scope => "row"}
-        = t("credit_total")
-        \:
+      %th{:scope => "row"} #{t("credit_total")}:
       %td{:align => "right"}= number_to_currency @credit_total
     %tr
-      %th{:scope => "row"}
-        = t("sales_total")
-        \:
+      %th{:scope => "row"} #{t("sales_total")}:
       %td{:align => "right"}= number_to_currency @sales_total
 - content_for :sidebar do
   = render :partial => 'admin/shared/report_criteria', :locals => {}

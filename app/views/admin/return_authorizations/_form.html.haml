@@ -4,23 +4,23 @@
     %th= t("quantity_shipped")
     %th= t("return_quantity")
   - @return_authorization.order.shipped_units.each do |shipped_unit|
-  %tr{:id => dom_id(shipped_unit[0])}
-    %td
-      %h4{:style => "margin-bottom:0px;"}= shipped_unit[0].name
-      = shipped_unit[0].options_text
-    %td= shipped_unit[1]
-    %td.return_quantity
-      = text_field_tag "return_quantity[#{shipped_unit[0].id}]",                                                                |
-        @returned_units.empty? ? 0 : (@returned_units[shipped_unit[0].id].nil? ? 0 : @returned_units[shipped_unit[0].id].size), |
-        {:style => "width:30px;"}                                                                                               |
-  </haml:block>
+    %tr{:id => dom_id(shipped_unit[0])}
+      %td
+        %h4{:style => "margin-bottom:0px;"}= shipped_unit[0].name
+        = shipped_unit[0].options_text
+      %td= shipped_unit[1]
+      %td.return_quantity
+        - tf_name = "return_quantity[#{shipped_unit[0].id}]"
+        - tf_value = 0
+        - unless (@returned_units.empty? or @returned_units[shipped_unit[0].id].nil?)
+          - tf_value = @returned_units[shipped_unit[0].id].size
+        = text_field_tag tf_name, tf_value, {:style => "width:30px;"}
 - f.field_container :amount do
   = f.label :amount, t("amount")
   %span.required *
   %br/
   = f.text_field :amount, {:style => "width:80px;"}
-  = t("rma_value")
-  \:
+  #{t("rma_value")}:
   %span#rma_value
   = f.error_message_on :amount
 - f.field_container :reason do
@@ -28,11 +28,11 @@
   = f.text_area :reason, {:style=> "height:100px;", :class => 'fullwidth'}
   = f.error_message_on :reason
 - content_for :head do
-  :javascript
+  %script{:type => 'text/javascript'}
     var variant_prices = new Array();
-<haml:silent>     @return_authorization.order.shipped_units.each do |shipped_unit| 
-</haml:silent><haml:block>      variant_prices[#{shipped_unit[0].id.to_s}] = #{shipped_unit[0].price};
-</haml:block>
+    - @return_authorization.order.shipped_units.each do |shipped_unit| 
+      variant_prices[#{shipped_unit[0].id.to_s}] = #{shipped_unit[0].price};
+
     function calculate_rma_price(object, value){
       var rma_amount = 0;
 
@@ -53,4 +53,3 @@
 
       calculate_rma_price();
     });
-  

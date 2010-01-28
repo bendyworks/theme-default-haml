@@ -6,27 +6,21 @@
   %br{:clear => "clear"}/
   %ul.sidebar.product-menu
     - hook :admin_product_tabs, {:current => current} do
-      <li#{' class="active"' if current == "Product Details"}>
-      \#{link_to t("product_details"), edit_admin_product_url(@product)}
-      </li>
+      %li{:class => (current == "Product Details" ? 'active' : '')}
+        = link_to t("product_details"), edit_admin_product_url(@product)
       - if url_options_authenticate?(:controller => 'admin/images')
-        <li#{' class="active"' if current == "Images"}>
-        \#{link_to t("images"), admin_product_images_url(@product)}
-        </li>
+        %li{:class => (current == "Images" ? 'active' : '')}
+          = link_to t("images"), admin_product_images_url(@product)
       - if url_options_authenticate?(:controller => 'admin/variants')
-        <li#{' class="active"' if current == "Variants"}>
-        \#{link_to t("variants"),  admin_product_variants_url(@product)}
-        </li>
+        %li{:class => (current == "Variants" ? 'active' : '')}
+          = link_to t("variants"),  admin_product_variants_url(@product)
       - if url_options_authenticate?(:controller => 'admin/option_types')
-        <li#{' class="active"' if current == "Option Types"}>
-        \#{link_to t("option_types"), selected_admin_product_option_types_url(@product)}
-        </li>
+        %li{:class => (current == "Option Types" ? 'active' : '')}
+          = link_to t("option_types"), selected_admin_product_option_types_url(@product)
       - if url_options_authenticate?(:controller => 'admin/properties')
-        <li#{' class="active"' if current == "Product Properties"}>
-        \#{link_to t("product_properties"), admin_product_product_properties_url(@product)}
-        </li>
+        %li{:class => (current == "Product Properties" ? 'active' : '')}
+          = link_to t("product_properties"), admin_product_product_properties_url(@product)
       - if url_options_authenticate?(:controller => 'admin/taxons')
-        <li#{' class="active"' if current == "Taxons"}>
-        \#{link_to t("taxons"), selected_admin_product_taxons_url(@product)}
-        </li>
+        %li{:class => (current == "Taxons" ? 'active' : '')}
+          = link_to t("taxons"), selected_admin_product_taxons_url(@product)
   %br{:clear => "clear"}/
