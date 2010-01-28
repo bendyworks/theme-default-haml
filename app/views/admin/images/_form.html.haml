@@ -1,13 +1,9 @@
 %tr
-  %td
-    = t("filename")
-    \:
+  %td #{t("filename")}:
   %td= f.file_field :attachment
 - if @product.has_variants?
   %tr
-    %td
-      = Variant.human_name
-      \:
+    %td #{Variant.human_name}:
     %td= f.select :viewable_id, @variants
 - else
   = hidden_field_tag :product_id, @product.id

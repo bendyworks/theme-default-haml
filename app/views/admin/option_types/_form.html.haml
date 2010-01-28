@@ -20,5 +20,6 @@
     %tr#none
       %td{:colspan => "3"}= @option_type.option_values.empty? ? t("none") : ""
 %p
-  = f.add_associated_link( icon('add') + ' ' + t("add_option_value"), @option_type.option_values.build, |
-    {:onclick => "jQuery('#none').hide();", :class => 'iconlink'})                                      |
+  - link_text = icon('add') + ' ' + t("add_option_value")
+  - link_html_opts = {:onclick => "jQuery('#none').hide();", :class => 'iconlink'}
+  = f.add_associated_link(link_text , @option_type.option_values.build, link_html_opts)

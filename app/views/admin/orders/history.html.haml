@@ -6,13 +6,11 @@
     %th= t("user")
     %th= "#{t('spree.date')}/#{t('spree.time')}"
   - @order.state_events.sort.each do |event|
-  %tr
-    %td= t("#{event.name}")
-    %td= event.user.email if event.user
-    %td= event.created_at.to_s(:date_time24)
-  </haml:block>
+    %tr
+      %td= t("#{event.name}")
+      %td= event.user.email if event.user
+      %td= event.created_at.to_s(:date_time24)
   - if @order.state_events.empty?
-  %tr
-    %td{:colspan => "3"}= t("none_available")
-  </haml:block>
+    %tr
+      %td{:colspan => "3"}= t("none_available")
 = button_link_to t('continue'), admin_orders_url

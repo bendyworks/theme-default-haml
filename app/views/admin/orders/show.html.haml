@@ -1,15 +1,14 @@
-.toolbar.order-links
-  = button_link_to t("edit"), edit_admin_order_url(@order.number), :icon => 'edit'
+.toolbar.order-links= button_link_to t("edit"), edit_admin_order_url(@order.number), :icon => 'edit'
 = render :partial => 'admin/shared/order_tabs', :locals => {:current => "Order Details"}
+- address_link = @current_action == "edit" ? edit_admin_order_checkout_url(@order) : admin_order_checkout_url(@order)
 - if @order.bill_address
   .adr
-    %h4
-      = link_to t("bill_address"), (@current_action=="edit" ? edit_admin_order_checkout_url(@order) : admin_order_checkout_url(@order))
+    %h4= link_to t("bill_address"), address_link
     = render :partial => 'admin/shared/address', :locals => {:address => @order.bill_address}
 - if @order.ship_address
   .adr
     %h4
-      = link_to t("ship_address"), (@current_action=="edit" ? edit_admin_order_checkout_url(@order) : admin_order_checkout_url(@order))
+      = link_to t("ship_address"), address_link
       = t("ship_address") if @order.shipments.empty?
     = render :partial => 'admin/shared/address', :locals => {:address => @order.ship_address}
 %hr/

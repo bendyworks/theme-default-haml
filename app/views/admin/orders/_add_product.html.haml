@@ -9,10 +9,9 @@
       = label_tag :add_quantity, t("qty")
       = text_field_tag :add_quantity,  1 , :class => 'fullwidth title'
     %div{:style => "float: left; width: 15%; padding-top: 17px;"}
-      = button_link_to_remote t("add"),                                                                                        |
-        {:url => admin_order_line_items_url(@order),                                                                           |
-        :method => :post,                                                                                                      |
-        :with => "'line_item[variant_id]=' + $('#add_variant_id').val() + '&line_item[quantity]=' + $('#add_quantity').val()", |
-        :before => "if($('#add_variant_id').val()==''){ return false; }",                                                      |
-        :after => "$('#add_product_name').val('');$('#add_variant_id').val('');$('#add_quantity').val(1)",                     |
-        :update => "order-form-wrapper"}, :icon => 'add'                                                                       |
+      - b_with = "'line_item[variant_id]=' + $('#add_variant_id').val() + '&line_item[quantity]=' + $('#add_quantity').val()"
+      - b_before = "if($('#add_variant_id').val()==''){ return false; }"
+      - b_after = "$('#add_product_name').val('');$('#add_variant_id').val('');$('#add_quantity').val(1)"
+      - b_update = "order-form-wrapper"
+      - b_opts = {:url => admin_order_line_items_url(@order), :method => :post, :with => b_with, :before => b_before, :after => b_after, :update => b_update}
+      = button_link_to_remote t("add"), b_opts, :icon => 'add'

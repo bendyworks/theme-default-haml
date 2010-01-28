@@ -4,8 +4,7 @@
 = render :partial => 'admin/shared/order_tabs', :locals => {:current => "Order Details"}
 = render :partial => "add_product"
 = error_messages_for :order
-#order-form-wrapper
-  = render :partial => 'form', :locals => {:order => @order}
+#order-form-wrapper= render :partial => 'form', :locals => {:order => @order}
 = button_link_to t('continue'), admin_orders_url
 - content_for :head do
   = javascript_include_tag 'admin/orders/edit.js'

@@ -4,46 +4,36 @@
   %tr
     %th= t("thumbnail")
     - if @product.has_variants?
-    %th= Variant.human_name
-    </haml:block>
+      %th= Variant.human_name
     %th= t("action")
   - @product.images.each do |image|
-  %tr{:id => dom_id(image)}
-    %td= link_to(image_tag(image.attachment.url(:mini)), image.attachment.url(:product))
-    - if @product.has_variants?
-    %td= t('all')
-    </haml:block>
-    %td.actions
-      = link_to_with_icon('edit', t("edit"), edit_admin_product_image_url(@product, image))
-      \&nbsp;
-      \#{link_to_delete image, {:url => admin_product_image_url(@product, image) }}
-  </haml:block>
+    %tr{:id => dom_id(image)}
+      %td= link_to(image_tag(image.attachment.url(:mini)), image.attachment.url(:product))
+      - if @product.has_variants?
+        %td= t('all')
+      %td.actions
+        = link_to_with_icon('edit', t("edit"), edit_admin_product_image_url(@product, image))
+        \&nbsp;
+        = link_to_delete image, {:url => admin_product_image_url(@product, image) }
   - @product.variants.each do |variant|
     - variant.images.each do |image|
-  %tr{:id => dom_id(image)}
-    %td= link_to(image_tag(image.attachment.url(:mini)), image.attachment.url(:product))
-    - if @product.has_variants?
-    %td= variant.options_text
-    </haml:block>
-    %td.actions
-      = link_to_with_icon('edit', t("edit"), edit_admin_product_image_url(@product, image))
-      \&nbsp;
-      \#{link_to_delete image, {:url => admin_product_image_url(@product, image) }}
-  </haml:block>
-  </haml:block>
+      %tr{:id => dom_id(image)}
+        %td= link_to(image_tag(image.attachment.url(:mini)), image.attachment.url(:product))
+        - if @product.has_variants?
+          %td= variant.options_text
+        %td.actions
+          = link_to_with_icon('edit', t("edit"), edit_admin_product_image_url(@product, image))
+          \&nbsp;
+          = link_to_delete image, {:url => admin_product_image_url(@product, image) }
 #images
 %br/
-%p
-  = link_to icon('add') + ' ' + t("new_image"), new_admin_product_image_url(@product), :id => "new_image_link"
+%p= link_to icon('add') + ' ' + t("new_image"), new_admin_product_image_url(@product), :id => "new_image_link"
 - content_for :head do
   :javascript
-    jQuery(document).ready(function(){  
-      
+    jQuery(document).ready(function(){
       jQuery('#new_image_link').click(function (event) { 
         event.preventDefault();
         jQuery(this).hide();
         jQuery.ajax({type: 'GET', url: this.href, data: ({authenticity_token: AUTH_TOKEN}), success: function(r){ jQuery('#images').html(r);} });
       });
-      
     });
-  
