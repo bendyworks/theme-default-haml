@@ -2,7 +2,7 @@
 = render :partial => "js_head"
 %h1= t("taxonomy_edit")
 %p#ajax_error.errorExplanation{:style => "display:none;"}
-- form_for(:taxon, :url => admin_taxonomy_url, :html => { :method => :put }) do |f|
+- form_for(:taxon, :url => admin_taxonomy_url, :html => {:method => :put}) do |f|
   = render :partial => 'form', :locals => {:f => f}
   %div
     %label= t("tree")

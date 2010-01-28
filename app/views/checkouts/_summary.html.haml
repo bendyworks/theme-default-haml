@@ -22,7 +22,7 @@
       %td
         %strong
           %span#summary-order-total= number_to_currency @order.total
-- form_for @checkout, :url => object_url, :html => { :id => 'checkout-summary-form'} do |summary_form|
+- form_for @checkout, :url => object_url, :html => {:id => 'checkout-summary-form'} do |summary_form|
   %label= t(:coupon_code)
   = summary_form.text_field :coupon_code, :id => 'coupon-code', :size => 14
   %input#post-summary{:style => "display:none", :type => "submit"}/

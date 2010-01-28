@@ -1,7 +1,7 @@
 = render :partial => 'admin/shared/order_tabs', :locals => {:current => "Adjustments"}
 %h2= t("adjustment")
 = error_messages_for :adjustment
-- form_for(@adjustment, :url => object_url, :html => { :method => :put}) do |f|
+- form_for(@adjustment, :url => object_url, :html => {:method => :put}) do |f|
   = render :partial => "form", :locals => {:f => f}
   %p.form-buttons
     = button t('continue')

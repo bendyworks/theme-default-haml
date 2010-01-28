@@ -5,10 +5,10 @@
         = label :new_variant, option.option_type.presentation
         %br/
         - if @variant.new_record?
-          - opt_values = option.option_type.option_values.collect {|ov| [ ov.presentation, ov.id ] }
+          - opt_values = option.option_type.option_values.collect {|ov| [ ov.presentation, ov.id ]}
           = select(:new_variant, option.option_type.presentation, opt_values, {})
         - else
-          - opt = @variant.option_values.detect {|o| o.option_type == option.option_type }.presentation
+          - opt = @variant.option_values.detect {|o| o.option_type == option.option_type}.presentation
           = text_field(:new_variant,  option.option_type.presentation, :value => opt, :disabled => 'disabled')
     %p
       = f.label :sku, t("sku")
@@ -30,5 +30,5 @@
       %br/
       = f.text_field :on_hand
   .yui-u
-    - Variant.additional_fields.select{|af| af[:only].nil? || af[:only].include?(:variant) }.each do |field|
+    - Variant.additional_fields.select{|af| af[:only].nil? || af[:only].include?(:variant)}.each do |field|
       = render :partial => "admin/shared/additional_field", :locals => {:field => field, :f => f}

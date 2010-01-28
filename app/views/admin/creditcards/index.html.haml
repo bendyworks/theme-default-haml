@@ -8,7 +8,7 @@
     %tr
       %td= creditcard.display_number
       %td
-        - txns = creditcard.txns.original.map {|original_txn| [original_txn, original_txn.creditcard_txns] }.flatten.compact
+        - txns = creditcard.txns.original.map {|original_txn| [original_txn, original_txn.creditcard_txns]}.flatten.compact
         - if txns.any?
           %table
             %tr

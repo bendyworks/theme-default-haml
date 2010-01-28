@@ -12,7 +12,7 @@
   = @return_authorization.number
   (#{t(@return_authorization.state.downcase)})
 = error_messages_for :return_authorization
-- form_for(@return_authorization, :url => object_url, :html => { :method => :put}) do |f|
+- form_for(@return_authorization, :url => object_url, :html => {:method => :put}) do |f|
   = render :partial => "form", :locals => {:f => f}
   %p.form-buttons
     = button t('continue')

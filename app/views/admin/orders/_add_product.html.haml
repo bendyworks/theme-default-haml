@@ -10,7 +10,7 @@
       = text_field_tag :add_quantity,  1 , :class => 'fullwidth title'
     %div{:style => "float: left; width: 15%; padding-top: 17px;"}
       - b_with = "'line_item[variant_id]=' + $('#add_variant_id').val() + '&line_item[quantity]=' + $('#add_quantity').val()"
-      - b_before = "if($('#add_variant_id').val()==''){ return false; }"
+      - b_before = "if($('#add_variant_id').val()==''){return false;}"
       - b_after = "$('#add_product_name').val('');$('#add_variant_id').val('');$('#add_quantity').val(1)"
       - b_update = "order-form-wrapper"
       - b_opts = {:url => admin_order_line_items_url(@order), :method => :post, :with => b_with, :before => b_before, :after => b_after, :update => b_update}

@@ -1,6 +1,6 @@
 :css
-  div.inner input[type=text], div.inner select { width: 80%; }
-  .hidden { display: none; }
+  div.inner input[type=text], div.inner select {width: 80%;}
+  .hidden {display: none;}
 %fieldset#billing
   - checkout_form.fields_for :bill_address do |bill_form|
     %legend= t("billing_address")

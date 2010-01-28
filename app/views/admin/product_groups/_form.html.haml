@@ -8,7 +8,7 @@
     = f.error_message_on :name
   - f.field_container :order_scope do
     = f.label :order_scope, t("order")
-    - scopes = Scopes::Product::ORDERING.collect{|p| [ t(:name, :scope =>[:product_scopes, :scopes, p]), p ] }
+    - scopes = Scopes::Product::ORDERING.collect{|p| [ t(:name, :scope =>[:product_scopes, :scopes, p]), p]}
     = select_tag("order_scope", options_for_select(scopes, order_scope))
 .product-scopes
   - [:search, :taxon, :price, :values].each do |group_name|

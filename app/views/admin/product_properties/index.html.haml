@@ -1,7 +1,7 @@
 = render :partial => 'admin/shared/product_sub_menu'
 = render :partial => 'admin/shared/product_tabs', :locals => {:current => "Product Properties"}
 = error_messages_for :product
-- form_for(:product, :url => admin_product_url(@product), :html => { :method => :put }) do |f|
+- form_for(:product, :url => admin_product_url(@product), :html => {:method => :put}) do |f|
   %table.index
     %thead
       %tr

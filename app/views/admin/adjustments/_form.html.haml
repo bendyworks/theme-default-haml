@@ -10,7 +10,7 @@
   = f.label :type, t("type")
   %span.required *
   %br/
-  = select_tag "adjustment[type]", grouped_options_for_select(@adjustment_types, @adjustment['type']),  { :disabled => (controller.action_name == 'edit')}
+  = select_tag "adjustment[type]", grouped_options_for_select(@adjustment_types, @adjustment['type']),  {:disabled => (controller.action_name == 'edit')}
   = f.error_message_on :description
 - f.field_container :description do
   = f.label :description, t("description")

@@ -1,6 +1,6 @@
 - @body_id = 'cart'
 %h1= t("shopping_cart")
-- form_for(@order, :url => object_url, :html => { :method => :put, :id => 'updatecart' }) do |order_form|
+- form_for(@order, :url => object_url, :html => {:method => :put, :id => 'updatecart'}) do |order_form|
   - hook :inside_cart_form do
     - hook :cart_items do
       = render :partial => 'form', :locals => {:order_form => order_form}

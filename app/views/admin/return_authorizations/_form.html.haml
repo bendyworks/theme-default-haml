@@ -34,22 +34,22 @@
       variant_prices[#{shipped_unit[0].id.to_s}] = #{shipped_unit[0].price};
 
     function calculate_rma_price(object, value){
-      var rma_amount = 0;
+    var rma_amount = 0;
 
-      $.each($("td.return_quantity input"), function(i, inpt){
-        var variant_id = $(inpt).attr('id').replace("return_quantity_", "");
-         rma_amount += variant_prices[variant_id] * $(inpt).val()
-      });
+    $.each($("td.return_quantity input"), function(i, inpt){
+    var variant_id = $(inpt).attr('id').replace("return_quantity_", "");
+    rma_amount += variant_prices[variant_id] * $(inpt).val()
+    });
 
-      if(!isNaN(rma_amount)){
-        $("span#rma_value").html(rma_amount.toFixed(2));
-      }
+    if(!isNaN(rma_amount)){
+    $("span#rma_value").html(rma_amount.toFixed(2));
+    }
     }
 
     jQuery(document).ready(function(){
-      $.each($("td.return_quantity input"), function(i, inpt){
-        $(inpt).delayedObserver(0.5, calculate_rma_price)
-      });
+    $.each($("td.return_quantity input"), function(i, inpt){
+    $(inpt).delayedObserver(0.5, calculate_rma_price)
+    });
 
-      calculate_rma_price();
+    calculate_rma_price();
     });

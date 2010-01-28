@@ -7,7 +7,7 @@
 :javascript
   function search_for_taxons(){
     jQuery.ajax({
-      data: {q: jQuery("#searchtext").val() },
+      data: {q: jQuery("#searchtext").val()},
       success: function(request){
         jQuery('#search_hits').html(request);
       },

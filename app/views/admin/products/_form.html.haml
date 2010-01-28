@@ -74,5 +74,5 @@
     %br/
     = f.text_field :meta_description, :class => 'fullwidth'
 - hook :admin_product_form_additional_fields, locals do
-  - Variant.additional_fields.select{|af| af[:only].nil? || af[:only].include?(:product) }.each do |field|
+  - Variant.additional_fields.select{|af| af[:only].nil? || af[:only].include?(:product)}.each do |field|
     = render :partial => "admin/shared/additional_field", :locals => {:field => field, :f => f}

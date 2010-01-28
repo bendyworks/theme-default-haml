@@ -1,4 +1,4 @@
-- form_for(@order, :url => admin_order_url(@order), :html => { :method => :put}) do |f|
+- form_for(@order, :url => admin_order_url(@order), :html => {:method => :put}) do |f|
   = f.hidden_field :number
   %table.index
     %tbody#line-items
@@ -10,7 +10,7 @@
           %span= t('total')
         %th.orders-actions
       - f.fields_for :line_items do |li_form|
-        = render :partial => "admin/orders/line_item", :locals => { :f => li_form }
+        = render :partial => "admin/orders/line_item", :locals => {:f => li_form}
     %tbody#subtotal
       %tr#subtotal-row
         %td{:colspan => "3"}

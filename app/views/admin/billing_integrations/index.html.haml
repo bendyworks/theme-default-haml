@@ -15,7 +15,7 @@
     %th= t("action")
   %tbody
     - @billing_integrations.each do |integration|
-      %tr{:id => dom_id integration}
+      %tr{:id => dom_id(integration)}
         %td{:width => "120px"}= integration.name
         %td{:width => "140px"}= integration.type
         %td{:width => "100px"}= integration.environment.to_s.titleize

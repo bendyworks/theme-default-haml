@@ -1,7 +1,7 @@
 = render :partial => 'admin/shared/order_tabs', :locals => {:current => "Payments"}
 %h2= t("activerecord.models.#{@object.class.to_s.underscore}.one")
 = error_messages_for :creditcard_payment
-- form_for(object, :url => object_url, :html => { :method => :put}) do |payment_form|
+- form_for(object, :url => object_url, :html => {:method => :put}) do |payment_form|
   = hidden_field_tag :payment_type, object.class.to_s.underscore
   %p
     %label #{t("amount")}:

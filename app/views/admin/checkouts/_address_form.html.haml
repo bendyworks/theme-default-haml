@@ -20,8 +20,8 @@
     %td
       %span{:id => "#{name==t('shipping_address') ? "s" : "b"}state"}
         - no_states = f.object.country.states.empty?
-        - tf_style = "width:150px;display:#{no_states ? 'block' : 'none' };"
-        - sel_style = "width:150px;display:#{no_states ? 'none' : 'block' };"
+        - tf_style = "width:150px;display:#{no_states ? 'block' : 'none'};"
+        - sel_style = "width:150px;display:#{no_states ? 'none' : 'block'};"
         = f.text_field :state_name, :style => tf_style, :disabled => !no_states
         = f.collection_select :state_id, @states, :id, :name, {:include_blank => true}, {:style => sel_style, :disabled => no_states}
     %td= f.label :country_id, t(:country)+':'

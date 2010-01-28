@@ -1,7 +1,7 @@
 %h1= @taxon.name
 - if @taxon.children.empty? || !params[:keywords].blank?
   - hook :taxon_products do
-    = render :partial => "shared/products", :locals => {:products => @products, :taxon => @taxon }
+    = render :partial => "shared/products", :locals => {:products => @products, :taxon => @taxon}
 - else
   - hook :taxon_children do
     = render :partial => "taxon", :collection => @taxon.children

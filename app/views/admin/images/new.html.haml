@@ -1,6 +1,6 @@
 %h4= t("new_image")
-- form_for(:image, :url => { :controller => 'images', :action => 'create' }, :html => { :multipart => true }) do |form|
-  %table.basic-table= render :partial => "form", :locals => { :f => form }
+- form_for(:image, :url => {:controller => 'images', :action => 'create'}, :html => {:multipart => true}) do |form|
+  %table.basic-table= render :partial => "form", :locals => {:f => form}
   %p.form-buttons
     = button t("update")
     = t('or')
