@@ -16,9 +16,8 @@
 %p
   %label= t("roles")
   %br/
-  - for role in @roles
-  %label.sub
-    = check_box_tag "user[role][#{role.name}]", 1, @user.has_role?(role.name)
-    = role.name
-  \&nbsp;
-  </haml:block>
+  - @roles.each do |role|
+    %label.sub
+      = check_box_tag "user[role][#{role.name}]", 1, @user.has_role?(role.name)
+      = role.name
+    \&nbsp;

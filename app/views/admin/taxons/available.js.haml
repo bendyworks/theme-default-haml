@@ -13,20 +13,17 @@
       %th= t("action")
   %tbody
     - @available_taxons.each do |taxon|
-    %tr{:id => dom_id(taxon)}
-      %td= taxon.name
-      %td= taxon_path taxon
-      %td.actions
-        = image_tag "spinner.gif", :style => "display:none", :id => "#{dom_id(taxon, :spinner)}"
-        = link_to_remote icon('add') + ' ' + t('select'),                                                                           |
-          {:url => select_admin_product_taxon_path(@product, taxon),                                                                |
-          :loading => "jQuery('##{dom_id(taxon, :spinner)}').show()",                                                               |
-          :update => 'selected-taxons',                                                                                             |
-          :complete => "jQuery('##{dom_id(taxon)}').remove(); jQuery('##{dom_id(taxon, :spinner)}').hide();"}, :class => 'iconlink' |
-    </haml:block>
+      %tr{:id => dom_id(taxon)}
+        %td= taxon.name
+        %td= taxon_path taxon
+        %td.actions
+          = image_tag "spinner.gif", :style => "display:none", :id => "#{dom_id(taxon, :spinner)}"
+          - link_text = icon('add') + ' ' + t('select')
+          - link_url = select_admin_product_taxon_path(@product, taxon)
+          - link_loading = "jQuery('##{dom_id(taxon, :spinner)}').show();"
+          - link_complete = "jQuery('##{dom_id(taxon)}').remove(); jQuery('##{dom_id(taxon, :spinner)}').hide();"
+          - link_opts = {:url => link_url, :loading => link_loading, :update => 'selected-taxons', :complete => link_complete}
+          = link_to_remote link_text, link_opts, :class => 'iconlink'
     - if @available_taxons.empty?
-    %tr
-      %td{:colspan => "3"}
-        = t('no_match_found')
-        \.
-    </haml:block>
+      %tr
+        %td{:colspan => "3"} #{t('no_match_found')}.

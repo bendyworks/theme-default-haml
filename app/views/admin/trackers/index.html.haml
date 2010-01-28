@@ -1,8 +1,7 @@
 = render :partial => 'admin/shared/configuration_menu'
 .toolbar
   %ul.actions
-    %li
-      = button_link_to t("new_tracker"), new_object_url, :icon => 'add'
+    %li= button_link_to t("new_tracker"), new_object_url, :icon => 'add'
   %br.clear/
 %h1= t("analytics_trackers")
 %table.index
@@ -14,15 +13,13 @@
     %th= t("action")
   %tbody
     - @trackers.each do |tracker|
-    %tr{:id => dom_id tracker}
-      - locals = {:tracker => tracker}
-      - hook :admin_trackers_index_rows, locals do
-      %td= tracker.analytics_id
-      %td= tracker.environment.to_s.titleize
-      %td= tracker.active.to_s.titleize
-      </haml:block>
-      %td
-        = link_to_edit tracker
-        \&nbsp;
-        \#{link_to_delete tracker}
-    </haml:block>
+      %tr{:id => dom_id(tracker)}
+        - locals = {:tracker => tracker}
+        - hook :admin_trackers_index_rows, locals do
+          %td= tracker.analytics_id
+          %td= tracker.environment.to_s.titleize
+          %td= tracker.active.to_s.titleize
+        %td
+          = link_to_edit tracker
+          \&nbsp;
+          = link_to_delete tracker

@@ -11,13 +11,12 @@
       %th= t("action")
   %tbody
     - @collection.each do |user|
-    %tr{:id => dom_id user}
-      %td{:width => "350px"}= link_to user.email, object_url(user)
-      %td
-        = link_to_edit user
-        \&nbsp;
-        \#{link_to_delete user}
-    </haml:block>
+      %tr{:id => dom_id(user)}
+        %td{:width => "350px"}= link_to user.email, object_url(user)
+        %td
+          = link_to_edit user
+          \&nbsp;
+          = link_to_delete user
 = will_paginate(:prev => "&#171; #{t('previous')}", :next => "#{t('next')} &#187;")
 - content_for :sidebar do
   - form_for @search do |f|
@@ -26,5 +25,5 @@
       %p
         = t("email")
         %br/
-        = f.text_field :email_contains, :size=>18
+        = f.text_field :email_contains, :size => 18
       %p= button t("search")

@@ -6,8 +6,7 @@
   %tr
     %td
       %label= t("environment")
-    %td
-      = collection_select(:tracker, :environment, Configuration.configurations.keys, :to_s, :titleize, {}, {:id => "tracker-env"})
+    %td= collection_select(:tracker, :environment, Configuration.configurations.keys, :to_s, :titleize, {}, {:id => "tracker-env"})
   %tr
     %td
       %label= t("active")

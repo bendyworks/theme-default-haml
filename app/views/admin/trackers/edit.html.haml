@@ -1,7 +1,6 @@
 = render :partial => 'admin/shared/configuration_menu'
 %h1= t("editing_tracker")
 = error_messages_for :tracker
-- form_for(@tracker, :url => object_url, :html => { :method => :put }) do |f|
-  = render :partial => "form", :locals => { :f => f }
-  %p
-    = submit_tag t("update")
+- form_for(@tracker, :url => object_url, :html => {:method => :put}) do |f|
+  = render :partial => "form", :locals => {:f => f}
+  %p= submit_tag t("update")

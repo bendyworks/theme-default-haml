@@ -2,5 +2,5 @@
 = error_messages_for :variant
 - form_for(@variant, :url => collection_url) do |f|
   - hook :admin_variant_new_form, {:f => f} do
-    = render :partial => "form", :locals => { :f => f }
+    = render :partial => "form", :locals => {:f => f}
   = render :partial => 'admin/shared/new_resource_links'
