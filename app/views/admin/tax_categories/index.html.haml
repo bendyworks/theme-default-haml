@@ -13,15 +13,13 @@
       %th
   %tbody
     - @tax_categories.each do |tax_category|
-    %tr{:id => dom_id tax_category}
-      %td= tax_category.name
-      %td= tax_category.description
-      %td.actions
-        = link_to_edit tax_category
-        \&nbsp;
-        \#{link_to_delete tax_category}
-    </haml:block>
+      %tr{:id => dom_id(tax_category)}
+        %td= tax_category.name
+        %td= tax_category.description
+        %td.actions
+          = link_to_edit tax_category
+          \&nbsp;
+          = link_to_delete tax_category
     - if @tax_categories.empty?
-    %tr
-      %td{:colspan => "3"} None.
-    </haml:block>
+      %tr
+        %td{:colspan => "3"} #{t('none')}.

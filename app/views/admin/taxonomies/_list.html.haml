@@ -2,11 +2,10 @@
   %tr
     %th= t("name")
     %th
-  - for taxonomy in @taxonomies
-  %tr{:id => dom_id taxonomy}
-    %td
-      = taxonomy.name
-    %td.actions
-      = link_to_edit taxonomy.id
-      \&nbsp; #{link_to_delete taxonomy}
-  </haml:block>
+  - @taxonomies.each do |taxonomy|
+    %tr{:id => dom_id(taxonomy)}
+      %td= taxonomy.name
+      %td.actions
+        = link_to_edit taxonomy.id
+        \&nbsp;
+        = link_to_delete taxonomy

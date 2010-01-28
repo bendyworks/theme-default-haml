@@ -2,8 +2,6 @@
 %h1= t("tax_settings")
 %table
   %tr
-    %th{:scope => "row"}
-      = t("show_price_inc_vat")
-      \:
+    %th{:scope => "row"} #{t("show_price_inc_vat")}:
     %td= Spree::Config[:show_price_inc_vat]
 %p= link_to_with_icon 'edit', t("edit"), edit_admin_tax_settings_path

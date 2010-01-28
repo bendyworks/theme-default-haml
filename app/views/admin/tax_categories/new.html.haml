@@ -2,6 +2,5 @@
 %h1= t("new_tax_category")
 = error_messages_for :tax_category
 - form_for(:tax_category, :url => collection_url) do |f|
-  = render :partial => "form", :locals => { :f => f }
-  %p.form-buttons
-    = button t("create")
+  = render :partial => "form", :locals => {:f => f}
+  %p.form-buttons= button t("create")

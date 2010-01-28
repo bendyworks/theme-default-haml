@@ -1,17 +1,11 @@
 %table
   %tr
-    %td
-      = t("zone")
-      \:
+    %td #{t("zone")}:
     %td= f.collection_select(:zone_id, @available_zones, :id, :name)
   %tr
-    %td
-      = t("tax_category")
-      \:
+    %td #{t("tax_category")}:
     %td= f.collection_select(:tax_category_id, @available_categories,:id, :name)
   %tr
-    %td
-      = t("rate")
-      \:
+    %td #{t("rate")}:
     %td= f.text_field :amount
 = render "admin/shared/calculator_fields", :f => f

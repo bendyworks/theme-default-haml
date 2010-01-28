@@ -1,0 +1,24 @@
+%h3 Manage Products for [#{@taxon.presentation}]
+= save_button('Save', 'manage-products', @taxon.id)
+|
+= reload_button('Reset', 'manage-products', 'manage_products', @taxon.id)
+|
+= cancel_button('Cancel', 'manage-products')
+%table.two-col
+  %tr
+    %td.two-col-left
+      %h4 Current Products
+      %h5 Click to remove
+      %ul#add-product-target.plain
+        - @taxon.products.each do |p|
+          %li
+            %span.product-action.product-action-remove{:id => "product-#{p.id}"}= p.name
+    %td.two-col-right
+      %h4 All Products
+      %h5 Click to add
+      %ul#remove-product-target.plain
+        - Product.find(:all).each do |p|
+          %li
+            %span.product-action.product-action-add{:id => "product-#{p.id}"}= p.name
+:javascript
+  spree.taxon.pm.onload(#{@taxon.id});

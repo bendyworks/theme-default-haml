@@ -1,7 +1,6 @@
 .toolbar
   %ul.actions
-    %li
-      = button_link_to t("new_tax_rate"), new_object_url, :icon => 'add'
+    %li= button_link_to t("new_tax_rate"), new_object_url, :icon => 'add'
   %br.clear/
 %h1= t("tax_rates")
 %table.index
@@ -13,13 +12,12 @@
     %th= t("action")
   %tbody
     - @tax_rates.each do |tax_rate|
-    %tr{:id => dom_id tax_rate}
-      %td= tax_rate.zone.name
-      %td= tax_rate.tax_category.name
-      %td= tax_rate.amount
-      %td= tax_rate.calculator.to_s
-      %td
-        = link_to_edit tax_rate
-        \&nbsp;
-        \#{link_to_delete tax_rate}
-    </haml:block>
+      %tr{:id => dom_id(tax_rate)}
+        %td= tax_rate.zone.name
+        %td= tax_rate.tax_category.name
+        %td= tax_rate.amount
+        %td= tax_rate.calculator.to_s
+        %td
+          = link_to_edit tax_rate
+          \&nbsp;
+          = link_to_delete tax_rate

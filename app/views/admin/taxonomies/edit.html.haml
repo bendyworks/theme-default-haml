@@ -10,8 +10,7 @@
     #taxonomy_tree.tree
   %p#progress{:style => "display:none;"}
     %img{:alt => "Spinner", :src => "/images/spinner.gif?1234540747", :style => "vertical-align:bottom;"}/
-    = t('updating')
-    \..
+    #{t('updating')}..
   %p
     %br/
     %small= t("taxonomy_tree_instruction")
@@ -20,23 +19,12 @@
     = t("or")
     = link_to t("cancel"), admin_taxonomies_path
 - content_for :head do
-  :javascript
-    var initial = [
-	   	{ attributes : 
-	   	  { "id" : "#{@taxonomy.root.id}" }, 
-			data : "#{@taxonomy.root.name}",
-			state : "open",
-			children : [
-<haml:silent>				 @taxonomy.root.children.each_with_index do |taxon,i| 
-</haml:silent><haml:block>					{
-						attributes :
-						{ id : "#{taxon.id}"},
-						data : "#{taxon.name}"
-<haml:silent>						 unless taxon.children.empty? 
-</haml:silent><haml:block>							,state : "closed"
-</haml:block>					}#{"," if i < (@taxonomy.root.children.size - 1)}
-</haml:block>			]
-      	}
-    ];
-    
-  
+  %script{:type => 'text/javascript'}
+    var initial =
+    [{
+    attributes : { "id" : "#{@taxonomy.root.id}" }, data : "#{@taxonomy.root.name}", state : "open",
+    children : [
+    - is_closed = lambda {|t| t.children.empty? ? '' : ',state : "closed"'}
+    = @taxonomy.root.children.map {|t| "{attributes : { id : \"#{t.id}\"}, data : \"#{t.name}\"#{is_closed(t)}}"}.join(',')
+    ]
+    }];

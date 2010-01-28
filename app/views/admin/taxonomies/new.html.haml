@@ -1,6 +1,5 @@
 = render :partial => 'admin/shared/configuration_menu'
 %h1= t("new_taxonomy")
 - form_for(:taxon, :url => collection_url) do |f|
-  = render :partial => "form", :locals => { :f => f }
-  %p.form-buttons
-    = button t("create")
+  = render :partial => "form", :locals => {:f => f}
+  %p.form-buttons= button t("create")
