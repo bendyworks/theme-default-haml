@@ -1,5 +1,39 @@
-Keeping this up to date with spree changes at git://github.com/railsdog/spree is not going to happen in real-time.  Instead, this project will pull in a batch of changes at once.
+This extension needs to match your version of spree.
 
+Prep:
+  git clone git://github.com/railsdog/spree.git
+  cd spree
+
+Approach #1: (throw away all spree changes newer than this gem)
+  git reset --hard 186224d11c53d4dfd47b96a142ed79d1da8a2345
+
+Approach #2: (bring this gem up to date with current spree)
+  # see .erb changes that need to be replicated here in haml
+  git diff 186224d11c53d4dfd47b96a142ed79d1da8a2345
+
+  fork this gem
+  # implement haml version of changes shown in git diff output above
+  send a pull request for the work you did to be picked up here
+
+Continue:
+  cd spree
+  # create your database.yml (copy database.yml.example?)
+  rake db:create:all
+  sudo rake gems:install
+  sudo gem install jeweler
+  rake db:migrate
+  rake build
+  sudo gem uninstall spree -v 0.9.99
+  sudo gem install pkg/spree-0.9.99.gem
+  [create spree project from gem with 'spree' command]
+  [navigate to project root]
+  [follow spree new project instructions, such as rake db:bootstrap]
+  script/extension install git://github.com/bendyworks/spree-theme-default-hamlized
+
+
+Notes:
+-----
+Keeping this up to date with spree changes at git://github.com/railsdog/spree is not going to happen in real-time.  Instead, this project will pull in a batch of changes at once.
 We have currently accounted for all .erb files and file changes through commit 186224d11c53d4dfd47b96a142ed79d1da8a2345 at git://github.com/railsdog/spree.
 
 If you account for newer .erb changes, then please update this comment and send a pull request.
