@@ -8,12 +8,12 @@ Current through commit 186224d11c53d4dfd47b96a142ed79d1da8a2345 on git://github.
 
 h2. Prep:
 
-<pre>git clone git://github.com/railsdog/spree.git
-cd spree</pre>
+* @git clone git://github.com/railsdog/spree.git@
+* @cd spree@
 
 h2. Approach #1: (throw away all spree changes newer than this gem)
 
-  git reset --hard 186224d11c53d4dfd47b96a142ed79d1da8a2345
+* @git reset --hard 186224d11c53d4dfd47b96a142ed79d1da8a2345@
 
 h2. Approach #2: (bring this gem up to date with current spree)
 
