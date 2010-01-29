@@ -1,11 +1,11 @@
-- paginated_products = params.key?(:keywords) ? Spree::Config.searcher.products : products
+- paginated_products = params.key?(:keywords) ? Spree::Config.searcher.products : @products
 - if params[:keywords]
   %h3= t(:search_results, :keywords => h(params[:keywords]))
 - if products.empty?
   = t(:no_products_found)
-- if products.any?
+- if @products.any?
   %ul.product-listing
-    - products.each do |product|
+    - @products.each do |product|
       - if Spree::Config[:show_zero_stock_products] || product.has_stock?
         %li{:id => "product_#{product.id}"}
           = link_to small_image(product), product
