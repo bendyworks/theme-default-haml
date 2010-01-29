@@ -1,0 +1,5 @@
+Keeping this up to date with spree changes at git://github.com/railsdog/spree is not going to happen in real-time.  Instead, this project will pull in a batch of changes at once.
+
+We have currently accounted for all .erb files and file changes through commit 186224d11c53d4dfd47b96a142ed79d1da8a2345 at git://github.com/railsdog/spree.
+
+If you account for newer .erb changes, then please update this comment and send a pull request.
