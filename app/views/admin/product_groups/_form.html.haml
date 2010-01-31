@@ -1,4 +1,4 @@
-- scopes_hash = @product_group.scopes_to_hash
+unobtrusive_date_text_picker- scopes_hash = @product_group.scopes_to_hash
 - order_scope = scopes_hash.keys.select{|s| Scopes::Product::ORDERING.include?(s)}.last
 %fieldset
   %legend= t(:product_group)

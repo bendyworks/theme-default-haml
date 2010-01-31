@@ -3,12 +3,7 @@
 = render :partial => "add_product"
 = error_messages_for :order
 #order-form-wrapper
-  - form_for @order, :url => collection_url do |f|
-    = render :partial => "form", :locals => {:f => f}
-    %p.form-buttons
-      = button t('continue')
-      = t("or")
-      = link_to t("actions.cancel"), admin_orders_url
+  = render :partial => "form"
 - content_for :head do
   = javascript_include_tag 'admin/orders/edit.js'
   = stylesheet_link_tag 'admin/edit_orders.css'

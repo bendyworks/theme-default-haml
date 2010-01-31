@@ -4,7 +4,7 @@ h1. spree-theme-default-hamlized
 
 As of 1/29/2010, this extension is very new.  Please help us make it more robust.
 
-Current through commit 186224d11c53d4dfd47b96a142ed79d1da8a2345 on git://github.com/railsdog/spree.git
+Current through commit b39704ab5f990cbe5409cc3052c2a107c219d202 on git://github.com/railsdog/spree.git
 
 h2. Prep:
 
@@ -13,12 +13,12 @@ h2. Prep:
 
 h2. Approach #1: (throw away all spree changes newer than this gem)
 
-# @git reset --hard 186224d11c53d4dfd47b96a142ed79d1da8a2345@
+# @git reset --hard b39704ab5f990cbe5409cc3052c2a107c219d202@
 
 h2. Approach #2: (bring this gem up to date with current spree)
 
 # see .erb changes that need to be replicated here in haml
-## @git diff 186224d11c53d4dfd47b96a142ed79d1da8a2345@
+## @git diff b39704ab5f990cbe5409cc3052c2a107c219d202@
 # fork this gem
 # implement haml version of changes shown in git diff output above
 # send a pull request for the work you did to be picked up here

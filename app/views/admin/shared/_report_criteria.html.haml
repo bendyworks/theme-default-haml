@@ -3,11 +3,11 @@
   %br/
   .yui-g.date-range-filter
     .yui-u.sub-field.first
-      = s.unobtrusive_date_picker :created_at_after
+      = s.unobtrusive_date_text_picker :created_at_after
       %br/
       %label.sub= t("start")
     .yui-u.sub-field
-      = s.unobtrusive_date_picker :created_at_before
+      = s.unobtrusive_date_text_picker :created_at_before
       %br/
       %label= t("stop")
   %p= button t("search")
