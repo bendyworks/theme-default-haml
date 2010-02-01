@@ -10,7 +10,7 @@
     - opt_text = t("activerecord.models.#{payment_type}.one")
     - opt_val = new_admin_order_payment_path(:payment_type => payment_type.to_s)
     - [opt_text, opt_val]
-  - selected_opt = new_admin_order_payment_path(:payment_type => @payment.class.to_s.underscore))
+  - selected_opt = new_admin_order_payment_path(:payment_type => @payment.class.to_s.underscore)
   = select_tag :payment_type, options_for_select(sel_opts, selected_opt, :class => 'jump_menu')
 - form_for @payment, :url => collection_url do |f|
   = hidden_field_tag :payment_type, object.class.to_s.underscore
