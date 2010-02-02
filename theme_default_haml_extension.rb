@@ -1,7 +1,7 @@
-class ThemeDefaultHamlizedExtension < Spree::Extension
+class ThemeDefaultHamlExtension < Spree::Extension
   version "0.0.1"
   description "Spree Theme Default converted to use HAML and SASS"
-  url "http://github.com/bendyworks/spree-hamlized"
+  url "http://github.com/bendyworks/theme-default-haml"
 
   def self.require_gems(config)
     # HAML should be loaded in the extension, but it appears to load haml-edge

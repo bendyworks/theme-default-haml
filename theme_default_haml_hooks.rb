@@ -1,4 +1,4 @@
-class ThemeDefaultHamlizedHooks < Spree::ThemeSupport::HookListener
+class ThemeDefaultHamlHooks < Spree::ThemeSupport::HookListener
 
   #
   # In this file you can modify the content of the hooks available in the default templates

@@ -1,4 +1,4 @@
-h1. theme-default-hamlized
+h1. theme-default-haml
 
 *This extension needs to match your version of spree.*
 
