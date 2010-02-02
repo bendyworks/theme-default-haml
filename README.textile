@@ -37,7 +37,7 @@ h2. Continue:
 # create spree project from gem with 'spree' command
 # navigate to project root
 # follow spree new project instructions, such as rake db:bootstrap
-# @script/extension install git://github.com/bendyworks/spree-theme-default-hamlized@
+# @script/extension install git://github.com/bendyworks/theme-default-haml@
 
 
 h2. Notes:
