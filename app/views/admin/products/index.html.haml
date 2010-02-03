@@ -23,7 +23,7 @@
         %td= product.name
         %td= product.price
       %td.actions
-        - hook :admin_orders_index_row_actions, locals do
+        - hook :admin_products_index_row_actions, locals do
           = link_to_edit product unless product.deleted?
           \&nbsp;
           = link_to_clone product
